@@ -4,6 +4,8 @@ extends Node2D
 @export var head_linear_damp = 4.0
 @export var head_angular_damp = 4.0
 
+@onready var camera = $"Camera2D"
+
 const LINK_SCENE = preload("res://body_part.tscn")
 const HEAD_SCENE = preload("res://head.tscn")
 const NUM_LINKS = 5
@@ -45,6 +47,7 @@ func init_head():
 	head.position = Vector2(0, -LINK_SPACING)
 	head.linear_damp = head_linear_damp
 	head.angular_damp = head_angular_damp
+	head.is_real_head = true
 	add_child(head)
 	previous_link = head
 
@@ -82,6 +85,7 @@ func init_links():
 		previous_link = link
 
 func _physics_process(delta):
+	handle_camera()
 	var input_direction = Vector2.ZERO
 
 	if Input.is_action_pressed("ui_right"):
@@ -102,6 +106,9 @@ func _physics_process(delta):
 
 	if active_head:
 		active_head.apply_force(current_force)
+
+func handle_camera():
+	camera.position = head.position
 
 func _input(event):
 	handle_grabbing(event)

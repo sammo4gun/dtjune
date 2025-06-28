@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8arbucqopsgm"]
+[gd_scene load_steps=8 format=3 uid="uid://c8arbucqopsgm"]
 
 [ext_resource type="Script" uid="uid://c4ogtft3wpc3l" path="res://head.gd" id="1_xe7ry"]
+[ext_resource type="Texture2D" uid="uid://gdl7a77ebxlm" path="res://Assets/Caterpillar/caterpillar head talons closed.png" id="2_hukeq"]
+[ext_resource type="Texture2D" uid="uid://da72yplofo7uk" path="res://Assets/Caterpillar/caterpillar head talons open.png" id="2_pij62"]
+[ext_resource type="Texture2D" uid="uid://eshohnsbqkny" path="res://Assets/Caterpillar/caterpillar bum talons open.png" id="4_akhm5"]
+[ext_resource type="Texture2D" uid="uid://bwnyo4ybvdueq" path="res://Assets/Caterpillar/caterpillar bum talons closed.png" id="5_7nidb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dftf"]
 
@@ -19,3 +23,31 @@ shape = SubResource("CircleShape2D_2dftf")
 position = Vector2(-1.90735e-06, 0)
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_mihp7")
+
+[node name="HeadOpenSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -6)
+rotation = 1.5708
+scale = Vector2(1.10637, 1.10637)
+texture = ExtResource("2_pij62")
+
+[node name="HeadClosedSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2, -6)
+rotation = 1.5708
+scale = Vector2(1.10637, 1.10637)
+texture = ExtResource("2_hukeq")
+
+[node name="TailOpenSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, 4)
+rotation = 1.5708
+scale = Vector2(1.11431, 1.11431)
+texture = ExtResource("4_akhm5")
+
+[node name="TailClosedSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, 4)
+rotation = 1.5708
+scale = Vector2(1.114, 1.114)
+texture = ExtResource("5_7nidb")

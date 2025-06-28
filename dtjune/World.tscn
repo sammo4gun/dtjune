@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
-[ext_resource type="PackedScene" path="res://player.tscn" id="3_bcbcq"]
+[ext_resource type="PackedScene" uid="uid://xwr3l0s3uhd" path="res://player.tscn" id="3_bcbcq"]
 [ext_resource type="PackedScene" uid="uid://c20xcgusbs3hk" path="res://fruit.tscn" id="4_js7pq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
