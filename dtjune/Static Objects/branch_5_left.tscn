@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgamj54b8xyka"]
+
+[ext_resource type="Texture2D" uid="uid://dlaeu0jpn78xf" path="res://Assets/Branch/branch 5.png" id="1_571ur"]
+
+[node name="Branch5Left" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(-1, 1)
+texture = ExtResource("1_571ur")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(-449, -67, -358, -66, -329, -75, -208, -73, -36, -78, 104, -102, 185, -105, 263, -98, 322, -94, 368, -78, 326, -67, 190, -61, 72, -23, -64, 29, -135, 22, -230, 21, -276, 36, -216, 44, -137, 61, -72, 82, 56, 83, 86, 85, 95, 76, 95, 57, 86, 54, 78, 43, 82, 29, 95, 14, 117, 16, 128, 29, 129, 40, 124, 49, 111, 53, 114, 73, 117, 87, 158, 91, 163, 84, 162, 70, 153, 62, 151, 53, 169, 40, 190, 40, 198, 52, 200, 66, 190, 73, 183, 73, 178, 87, 183, 96, 255, 108, 331, 138, 421, 170, 438, 171, 426, 182, 355, 176, 276, 165, 209, 156, 127, 141, -43, 141, -129, 144, -234, 127, -303, 115, -373, 114, -433, 124, -453, 124)

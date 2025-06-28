@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c26yxi71dkgb"]
+
+[ext_resource type="Texture2D" uid="uid://ds103bbswqr4n" path="res://Assets/Branch/branch 1.png" id="1_mt8kp"]
+
+[node name="Branch1" type="StaticBody2D" groups=["Wall"]]
+
+[node name="Branch1" type="Sprite2D" parent="."]
+position = Vector2(235, 400)
+texture = ExtResource("1_mt8kp")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["Wall"]]
+polygon = PackedVector2Array(-208, 323, -89, 286, -42, 286, 7, 265, 114, 258, 89, 268, 27, 278, 12, 287, 10, 298, -45, 325, 91, 326, 185, 321, 277, 271, 323, 260, 381, 259, 448, 243, 531, 232, 581, 232, 597, 242, 617, 240, 620, 248, 601, 255, 532, 256, 502, 255, 466, 273, 416, 274, 375, 292, 334, 296, 301, 313, 462, 325, 637, 335, 622, 355, 605, 361, 587, 367, 559, 388, 528, 396, 472, 397, 447, 427, 426, 434, 360, 446, 298, 467, 217, 468, 185, 462, 95, 463, 145, 484, 235, 489, 332, 496, 342, 504, 465, 508, 531, 518, 531, 530, 501, 531, 332, 530, 227, 515, 111, 513, 29, 505, -5, 490, -40, 477, -214, 476)
