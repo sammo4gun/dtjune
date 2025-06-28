@@ -2,13 +2,20 @@ extends Node2D
 
 @export var head_linear_damp = 4.0
 @export var head_angular_damp = 4.0
-
-@onready var camera = $"Camera2D"
+@export var angular_limit_body = deg_to_rad(45)
+@export var angular_limit_head = deg_to_rad(90)
 
 const LINK_SCENE = preload("res://body_part.tscn")
 const HEAD_SCENE = preload("res://head.tscn")
-const NUM_LINKS = 5
+const JOINT_SCENE = preload("res://body_joint.tscn")
 const LINK_SPACING = 25 * 1.5
+
+const COLOUR_DICT = {
+	"base": Color8(170, 199, 117),
+	"white": Color8(155, 155, 155),
+	"red": Color8(206, 21, 0),
+	"yellow": Color8(209, 218, 0),
+}
 
 var previous_link = null
 var active_head = null
@@ -23,13 +30,27 @@ var current_force = Vector2.ZERO
 var max_head_thrust = 0
 var current_head_thrust = 0
 
+var target_rotation = {}
+
+var growing = false
+
+var NUM_LINKS = 1
+var COLOUR_LIST = ['white']
+
 func _ready():
 	init_head()
 	init_links()
 	init_tail()
+	init_colours()
 	
 	var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	max_head_thrust = get_total_mass() * gravity	
+
+func init_colours():
+	head.modulate = COLOUR_DICT['base']
+	for i in range(len(link_array)):
+		link_array[i].modulate = COLOUR_DICT[COLOUR_LIST[i]]
+	tail.modulate = COLOUR_DICT['base']
 
 func get_total_mass() -> float:
 	var total_mass = head.mass + tail.mass
@@ -39,37 +60,39 @@ func get_total_mass() -> float:
 
 func init_head():
 	head = HEAD_SCENE.instantiate()
-	head.position = Vector2(0, -LINK_SPACING)
+	head.position = Vector2(-LINK_SPACING, 0)
 	head.linear_damp = head_linear_damp
 	head.angular_damp = head_angular_damp
 	head.is_real_head = true
 	add_child(head)
 	previous_link = head
+	target_rotation[head] = null
 
 func init_tail():
 	tail = HEAD_SCENE.instantiate()
-	tail.position = Vector2(0, LINK_SPACING * (NUM_LINKS))
+	tail.position = Vector2(LINK_SPACING * (NUM_LINKS), 0)
 	add_child(tail)
 
 	tail.linear_damp = head_linear_damp
 	tail.angular_damp = head_angular_damp
 
-	var joint = PinJoint2D.new()
+	var joint = JOINT_SCENE.instantiate()
 	joint.position = (previous_link.position + tail.position) / 2
 	joint.disable_collision = false;
 	joint.node_a = previous_link.get_path()
 	joint.node_b = tail.get_path()
+	target_rotation[tail] = null
 	add_child(joint)
 
 func init_links():
 	for i in range(NUM_LINKS):
 		var link = LINK_SCENE.instantiate()
-		link.position = Vector2(0, i * LINK_SPACING)
+		link.position = Vector2(i * LINK_SPACING, 0)
 		link_array.append(link)
 		add_child(link)
 		
 		if previous_link:
-			var joint = PinJoint2D.new()
+			var joint = JOINT_SCENE.instantiate()
 			joint.node_a = previous_link.get_path()
 			joint.node_b = link.get_path()
 			joint.position = (previous_link.position + link.position) / 2
@@ -78,40 +101,53 @@ func init_links():
 			
 		previous_link = link
 
+func get_camera_pos():
+	return head.global_position
+
 func _physics_process(delta):
-	handle_camera()
-	var input_direction = Vector2.ZERO
+	handle_rotation()
+	if not growing:
+		var input_direction = Vector2.ZERO
 
-	if Input.is_action_pressed("ui_right"):
-		input_direction.x += 1
-	if Input.is_action_pressed("ui_left"):
-		input_direction.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		input_direction.y += 1
-	if Input.is_action_pressed("ui_up"):
-		input_direction.y -= 1
+		if Input.is_action_pressed("ui_right"):
+			input_direction.x += 1
+		if Input.is_action_pressed("ui_left"):
+			input_direction.x -= 1
+		if Input.is_action_pressed("ui_down"):
+			input_direction.y += 1
+		if Input.is_action_pressed("ui_up"):
+			input_direction.y -= 1
 
-	if input_direction != Vector2.ZERO:
-		var target_force = input_direction.normalized() * current_head_thrust
-		var acceleration_speed = 3.0
-		current_force = current_force.lerp(target_force, delta * acceleration_speed)
-	else:
-		current_force = Vector2.ZERO
+		if input_direction != Vector2.ZERO:
+			var target_force = input_direction.normalized() * current_head_thrust
+			var acceleration_speed = 3.0
+			current_force = current_force.lerp(target_force, delta * acceleration_speed)
+		else:
+			current_force = Vector2.ZERO
+		if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
+			attach_joint_to_candidate(head, "head_joint")
 
-	if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
-		attach_joint_to_candidate(head, "head_joint")
+		if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
+			attach_joint_to_candidate(tail, "tail_joint")
+		
+		get_active_head()
+		if active_head:
+			active_head.apply_force(current_force)
+		handle_head_sprites()
 
-	if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
-		attach_joint_to_candidate(tail, "tail_joint")
+func handle_head_sprites():
+	if Input.is_action_pressed("stick_head"):
+		head.seeking = self.get("head_joint") == null
+	else: head.seeking = false
+	if Input.is_action_pressed("stick_tail"):
+		tail.seeking = self.get("tail_joint") == null
+	else: tail.seeking = false
 
-	get_active_head()
+func handle_rotation():
+	for part in target_rotation:
+		if target_rotation[part] != null:
+			part.global_rotation = lerpf(part.global_rotation, target_rotation[part], 0.1)
 
-	if active_head:
-		active_head.apply_force(current_force)
-
-func handle_camera():
-	camera.position = head.position
-	
 func get_active_head():
 	if self.get("head_joint") == null and self.get("tail_joint") != null:
 		current_head_thrust = max_head_thrust
@@ -136,11 +172,12 @@ func handle_detatching(event):
 func attach_joint_to_candidate(link_body: RigidBody2D, joint_name: String):
 	if link_body.stick_candidate == null or self.get(joint_name) != null:
 		return false
-
+	
 	var joint = PinJoint2D.new()
 	joint.position = (link_body.position)
 	joint.node_a = link_body.get_path()
 	joint.node_b = link_body.stick_candidate.get_path()
+	target_rotation[link_body] = null # tbd
 	add_child(joint)
 	self.set(joint_name, joint)
 	
@@ -148,6 +185,20 @@ func attach_joint_to_candidate(link_body: RigidBody2D, joint_name: String):
 
 func detach_joint(joint_name: String):
 	var joint = self.get(joint_name)
+	if joint_name == 'head_joint':
+		target_rotation[head] = null
+	if joint_name == 'tail_join':
+		target_rotation[tail] = null
 	if joint:
 		joint.queue_free()
 		self.set(joint_name, null)
+
+func eat_fruit(fruit):
+	var li = fruit.get_eaten()
+	head.start_eating(li[1])
+	await get_tree().create_timer(2.5).timeout
+	head.stop_eating()
+	get_parent().zoom_in()
+	await get_tree().create_timer(1.5).timeout
+	get_parent().grow_player(NUM_LINKS, COLOUR_LIST, li[0])
+	get_parent().zoom_out()

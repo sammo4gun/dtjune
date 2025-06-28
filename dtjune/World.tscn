@@ -1,5 +1,6 @@
 [gd_scene load_steps=23 format=4 uid="uid://bbq0b4ceveffm"]
 
+[ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
 [ext_resource type="PackedScene" uid="uid://bdtshlpdac7qh" path="res://player.tscn" id="3_bcbcq"]
 [ext_resource type="PackedScene" uid="uid://c20xcgusbs3hk" path="res://fruit.tscn" id="4_js7pq"]
@@ -253,6 +254,7 @@ sources/0 = SubResource("TileSetAtlasSource_bcbcq")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cmany"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_js7pq")
 
 [node name="Floor" type="StaticBody2D" parent="." groups=["Grabbable", "Wall"]]
 position = Vector2(2487, 5391)
