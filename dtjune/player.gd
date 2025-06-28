@@ -8,7 +8,7 @@ extends Node2D
 const LINK_SCENE = preload("res://body_part.tscn")
 const HEAD_SCENE = preload("res://head.tscn")
 const NUM_LINKS = 5
-const LINK_SPACING = 25
+const LINK_SPACING = 25 * 1.5
 
 var previous_link = null
 var active_head = null

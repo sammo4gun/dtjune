@@ -15,9 +15,11 @@ radius = 3.0
 script = ExtResource("1_xe7ry")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_2dftf")
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(1.5, 1.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-1.90735e-06, 0)
@@ -26,28 +28,28 @@ shape = SubResource("CircleShape2D_mihp7")
 
 [node name="HeadOpenSprite" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(0, -6)
+position = Vector2(0.8241, -7.1759)
 rotation = 1.5708
-scale = Vector2(1.10637, 1.10637)
+scale = Vector2(1.70322, 1.70322)
 texture = ExtResource("2_pij62")
 
 [node name="HeadClosedSprite" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(2, -6)
+position = Vector2(2.8241, -7.1759)
 rotation = 1.5708
-scale = Vector2(1.10637, 1.10637)
+scale = Vector2(1.70322, 1.70322)
 texture = ExtResource("2_hukeq")
 
 [node name="TailOpenSprite" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-1, 4)
+position = Vector2(-0.470209, 4.52979)
 rotation = 1.5708
-scale = Vector2(1.11431, 1.11431)
+scale = Vector2(1.65811, 1.65811)
 texture = ExtResource("4_akhm5")
 
 [node name="TailClosedSprite" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(-1, 4)
+position = Vector2(-0.470209, 4.52979)
 rotation = 1.5708
-scale = Vector2(1.114, 1.114)
+scale = Vector2(1.65765, 1.65765)
 texture = ExtResource("5_7nidb")
