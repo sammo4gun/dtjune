@@ -1,27 +1,71 @@
-[gd_scene load_steps=8 format=3 uid="uid://c8arbucqopsgm"]
+[gd_scene load_steps=15 format=3 uid="uid://c8arbucqopsgm"]
 
 [ext_resource type="Script" uid="uid://c4ogtft3wpc3l" path="res://head.gd" id="1_xe7ry"]
 [ext_resource type="Texture2D" uid="uid://gdl7a77ebxlm" path="res://Assets/Caterpillar/caterpillar head talons closed.png" id="2_hukeq"]
 [ext_resource type="Texture2D" uid="uid://da72yplofo7uk" path="res://Assets/Caterpillar/caterpillar head talons open.png" id="2_pij62"]
 [ext_resource type="Texture2D" uid="uid://eshohnsbqkny" path="res://Assets/Caterpillar/caterpillar bum talons open.png" id="4_akhm5"]
 [ext_resource type="Texture2D" uid="uid://bwnyo4ybvdueq" path="res://Assets/Caterpillar/caterpillar bum talons closed.png" id="5_7nidb"]
+[ext_resource type="Texture2D" uid="uid://b2f8cimqkddet" path="res://Assets/Caterpillar/caterpillar shocked .png" id="5_rwjvo"]
+[ext_resource type="Texture2D" uid="uid://rcreaiilx3tx" path="res://Assets/Caterpillar/caterpillar happy.png" id="6_hbaeg"]
+[ext_resource type="Texture2D" uid="uid://drgiqdq143f71" path="res://Assets/FoodMorsels.png" id="6_mkt57"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dftf"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4kg8v"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_rwjvo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.794118, 0.853933), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kf857"]
+curve = SubResource("Curve_rwjvo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hbaeg"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 80.0
+flatness = 1.0
+initial_velocity_min = 64.0
+initial_velocity_max = 100.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 200, 0)
+scale_max = 2.0
+alpha_curve = SubResource("CurveTexture_kf857")
+anim_offset_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mihp7"]
 radius = 3.0
 
 [node name="Head" type="RigidBody2D"]
+rotation = -1.5708
 script = ExtResource("1_xe7ry")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_2dftf")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="EatingParticles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 0.19, 0.19, 1)
+material = SubResource("CanvasItemMaterial_4kg8v")
+position = Vector2(-1.99997, -8.00001)
+rotation = -0.0785263
+emitting = false
+amount = 32
+texture = ExtResource("6_mkt57")
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_hbaeg")
+
+[node name="GrabFinder" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabFinder"]
 position = Vector2(-1.90735e-06, 0)
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_mihp7")
@@ -40,6 +84,20 @@ rotation = 1.5708
 scale = Vector2(1.70322, 1.70322)
 texture = ExtResource("2_hukeq")
 
+[node name="HeadShockedSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(2.8241, -7.1759)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("5_rwjvo")
+
+[node name="HeadHappySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1.00003, -7)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("6_hbaeg")
+
 [node name="TailOpenSprite" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-0.470209, 4.52979)
@@ -53,3 +111,5 @@ position = Vector2(-0.470209, 4.52979)
 rotation = 1.5708
 scale = Vector2(1.65765, 1.65765)
 texture = ExtResource("5_7nidb")
+
+[connection signal="area_entered" from="GrabFinder" to="." method="_on_grab_finder_area_entered"]

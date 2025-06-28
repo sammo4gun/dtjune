@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var SWAY = 8
-@export_flags("strawberry", "apple", "banana", "blueberry", "orange", "raspberry") var picked_type = 0
+@export_flags("strawberry", "apple", "banana", "blueberry", "orange", "raspberry", "grapes") var picked_type = 0
 
 @onready var sprites_dict = {
 	'strawberry': $StrawberrySprite,
@@ -10,6 +10,7 @@ extends Node2D
 	'blueberry': $BlueberrySprite,
 	'orange': $OrangeSprite,
 	'raspberry': $RaspberrySprite,
+	'grapes': $GrapesSprite,
 }
 @onready var particle_dict = {
 	'strawberry': Color8(227, 76, 76, 255),
@@ -18,6 +19,16 @@ extends Node2D
 	'blueberry': Color8(91, 110, 225, 255),
 	'orange': Color8(223, 113, 38, 255),
 	'raspberry': Color8(223, 16, 157, 255),
+	'grapes': Color8(104, 27, 204, 255),
+}
+@onready var colournames_dict = {
+	'strawberry': "red",
+	'apple': "green",
+	'banana': "yellow",
+	'blueberry': "blue",
+	'orange': "orange",
+	'raspberry': "violet",
+	'grapes': "purple",
 }
 @onready var particles = $Particles
 @onready var basepos = position
@@ -29,6 +40,7 @@ var types_dict = {
 	8: 'blueberry',
 	16: 'orange',
 	32: 'raspberry',
+	64: 'grapes',
 }
 var time = 0
 
@@ -52,4 +64,4 @@ func _process(delta: float) -> void:
 func get_eaten():
 	self.queue_free()
 	# returns: the type of fruit that was eaten, and the colour of that fruit
-	return [type, particle_dict[type]]
+	return [colournames_dict[type], particle_dict[type]]
