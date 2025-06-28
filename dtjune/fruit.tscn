@@ -1,0 +1,113 @@
+[gd_scene load_steps=16 format=3 uid="uid://c20xcgusbs3hk"]
+
+[ext_resource type="Script" uid="uid://d13wn4fkie8ov" path="res://fruit.gd" id="1_dajs1"]
+[ext_resource type="Texture2D" uid="uid://cft1ctkhluy1d" path="res://Assets/Fruit/strawberry.png" id="2_t45jj"]
+[ext_resource type="Texture2D" uid="uid://mx3aghq7tooy" path="res://Assets/Fruit/apple.png" id="3_hyqgl"]
+[ext_resource type="Texture2D" uid="uid://b1gghsq44delp" path="res://Assets/Fruit/banana.png" id="4_r5id7"]
+[ext_resource type="Texture2D" uid="uid://c4e4grqgy4e18" path="res://Assets/Fruit/blueberry.png" id="5_7dwnl"]
+[ext_resource type="Texture2D" uid="uid://c25jwk3uo6c6p" path="res://Assets/Fruit/orange.png" id="6_kf857"]
+[ext_resource type="Texture2D" uid="uid://hdfy5q8l52jk" path="res://Assets/Fruit/raspberry .png" id="7_r5id7"]
+[ext_resource type="Texture2D" uid="uid://drgiqdq143f71" path="res://Assets/FoodMorsels.png" id="8_7dwnl"]
+
+[sub_resource type="Curve" id="Curve_t45jj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.757353, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_7yftu"]
+curve = SubResource("Curve_t45jj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t45jj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3(0, -1, 0)
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+radial_accel_min = 15.0
+radial_accel_max = 25.0
+scale_min = 0.4
+scale_max = 0.7
+alpha_curve = SubResource("CurveTexture_7yftu")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7dwnl"]
+particles_animation = true
+particles_anim_h_frames = 2
+particles_anim_v_frames = 2
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_7dwnl"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.794118, 0.853933), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_kf857"]
+curve = SubResource("Curve_7dwnl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r5id7"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 80.0
+initial_velocity_min = 16.0
+initial_velocity_max = 32.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 200, 0)
+scale_min = 0.5
+scale_max = 1.2
+alpha_curve = SubResource("CurveTexture_kf857")
+anim_offset_max = 1.0
+
+[node name="Fruit" type="Node2D"]
+scale = Vector2(6, 6)
+script = ExtResource("1_dajs1")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+visible = false
+scale = Vector2(1, 1)
+amount = 16
+lifetime = 0.8
+preprocess = 5.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_t45jj")
+
+[node name="StrawberrySprite" type="Sprite2D" parent="."]
+scale = Vector2(0.375472, 0.375472)
+texture = ExtResource("2_t45jj")
+
+[node name="AppleSprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.284695, 0.284695)
+texture = ExtResource("3_hyqgl")
+
+[node name="BananaSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.833333, 0)
+scale = Vector2(0.311535, 0.311535)
+texture = ExtResource("4_r5id7")
+
+[node name="BlueberrySprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.214576, 0.214576)
+texture = ExtResource("5_7dwnl")
+
+[node name="OrangeSprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.303751, 0.303751)
+texture = ExtResource("6_kf857")
+
+[node name="RaspberrySprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0.833333, 0.333333)
+scale = Vector2(0.361912, 0.361912)
+texture = ExtResource("7_r5id7")
+
+[node name="EatingParticles" type="GPUParticles2D" parent="."]
+visible = false
+modulate = Color(1, 0.19, 0.19, 1)
+material = SubResource("CanvasItemMaterial_7dwnl")
+amount = 32
+texture = ExtResource("8_7dwnl")
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_r5id7")
