@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=7 format=4 uid="uid://bbq0b4ceveffm"]
 
-[ext_resource type="Texture2D" uid="uid://c1pee3o11g6i7" path="res://icon.svg" id="1_c6gwx"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
-[ext_resource type="Script" uid="uid://c7k0rtm57ohrg" path="res://test_body.gd" id="2_js7pq"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="3_bcbcq"]
 [ext_resource type="PackedScene" uid="uid://c20xcgusbs3hk" path="res://fruit.tscn" id="4_js7pq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
@@ -237,12 +236,9 @@ sources/0 = SubResource("TileSetAtlasSource_bcbcq")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cmany"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dftf"]
-size = Vector2(127, 125)
-
 [node name="World" type="Node2D"]
 
-[node name="Floor" type="StaticBody2D" parent="." groups=["Grabbable"]]
+[node name="Floor" type="StaticBody2D" parent="." groups=["Grabbable", "Wall"]]
 position = Vector2(389, 691)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="Floor"]
@@ -253,26 +249,13 @@ tile_set = SubResource("TileSet_js7pq")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("WorldBoundaryShape2D_cmany")
 
-[node name="TestBody" type="RigidBody2D" parent="."]
-position = Vector2(301, 383)
-rotation = 0.475661
-script = ExtResource("2_js7pq")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestBody"]
-position = Vector2(-0.5, -1.49998)
-scale = Vector2(0.567294, 0.567294)
-shape = SubResource("RectangleShape2D_2dftf")
-
-[node name="Sprite2D" type="Sprite2D" parent="TestBody"]
-scale = Vector2(0.559143, 0.559143)
-texture = ExtResource("1_c6gwx")
-
-[node name="Camera2D" type="Camera2D" parent="TestBody"]
-
 [node name="Fruit" parent="." instance=ExtResource("4_js7pq")]
 position = Vector2(144, 655)
-picked_type = 2
+picked_type = 4
 
 [node name="Fruit2" parent="." instance=ExtResource("4_js7pq")]
 position = Vector2(744, 658)
 picked_type = 1
+
+[node name="Player" parent="." instance=ExtResource("3_bcbcq")]
+position = Vector2(182, 318)
