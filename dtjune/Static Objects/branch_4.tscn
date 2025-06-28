@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://jibikt8joi7l" path="res://Assets/Branch/branch 4.png" id="1_ka7nf"]
 
-[node name="Branch4" type="StaticBody2D"]
+[node name="Branch4" type="StaticBody2D" groups=["Wall"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ka7nf")

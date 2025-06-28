@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://cvwioh1h1jfa"]
+
+[ext_resource type="Texture2D" uid="uid://coa1gq13fxyd6" path="res://Assets/Vines/vine 1.png" id="1_pnbmt"]
+[ext_resource type="Texture2D" uid="uid://7hpklf3t45aj" path="res://Assets/Vines/vine 2.png" id="2_kn4x5"]
+[ext_resource type="Texture2D" uid="uid://drxprv02ppwyw" path="res://Assets/Vines/vine 3.png" id="3_jxnif"]
+[ext_resource type="Texture2D" uid="uid://dohyn0uteuppo" path="res://Assets/Vines/vine 4.png" id="4_je2tx"]
+[ext_resource type="Texture2D" uid="uid://covwqfkdhssko" path="res://Assets/Vines/finished vine.png" id="5_kn4x5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vmd3q"]
+
+[node name="Vine" type="Node2D"]
+
+[node name="Base" type="StaticBody2D" parent="."]
+position = Vector2(-286, -428)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
+shape = SubResource("CircleShape2D_vmd3q")
+
+[node name="PinJoint2D4" type="PinJoint2D" parent="."]
+position = Vector2(-288, -424)
+node_a = NodePath("../Base")
+node_b = NodePath("../VinePart1")
+
+[node name="VinePart1" type="RigidBody2D" parent="." groups=["Wall"]]
+position = Vector2(-283, -190)
+linear_damp = 20.0
+angular_damp = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="VinePart1"]
+position = Vector2(0, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("1_pnbmt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VinePart1"]
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(-8, -47, -8, -34, -7, -34, -7, -31, -13, -30, -18, -28, -21, -24, -23, -22, -24, -17, -23, -14, -21, -12, -15, -13, -11, -15, -8, -20, -8, -28, -6, -28, -4, -17, -7, -5, -8, -1, -8, 7, -12, 8, -16, 13, -18, 16, -20, 20, -25, 23, -26, 24, -26, 25, -22, 27, -14, 28, -10, 23, -10, 20, -7, 16, -6, 18, -4, 24, -4, 33, -5, 36, -7, 40, -8, 49, 8, 49, 9, 41, 11, 34, 11, 20, 7, 11, 7, 6, 6, 6, 6, -7, 7, -11, 8, -11, 10, -5, 13, 2, 15, 6, 21, 8, 22, 4, 23, -5, 19, -10, 14, -13, 8, -13, 11, -23, 11, -32, 8, -36, 8, -41, 7, -47)
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(-281, 24)
+node_a = NodePath("../VinePart1")
+node_b = NodePath("../VinePart3")
+
+[node name="VinePart3" type="RigidBody2D" parent="." groups=["Wall"]]
+position = Vector2(-285, 274)
+linear_damp = 20.0
+angular_damp = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="VinePart3"]
+position = Vector2(0, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("3_jxnif")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VinePart3"]
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(-10, 48, -10, 43, -4, 36, 2, 28, 4, 23, 3, 18, 1, 11, -3, 2, -9, -6, -10, 3, -14, 8, -16, 10, -12, 15, -11, 21, -12, 27, -17, 31, -19, 27, -20, 16, -18, 11, -20, 9, -20, 3, -18, -3, -15, -8, -12, -11, -11, -25, -8, -29, -6, -36, -7, -45, -8, -47, 9, -47, 9, -32, 10, -31, 17, -29, 21, -26, 25, -19, 26, -14, 25, -9, 19, -9, 14, -12, 10, -14, 9, -16, 9, -28, 8, -30, 6, -27, 4, -22, 4, -15, 6, -9, 9, -4, 11, 2, 12, 6, 14, 9, 14, 13, 15, 20, 16, 21, 16, 35, 10, 40, 7, 43, 7, 48, 8, 49, -10, 49)
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(-292, 507)
+node_a = NodePath("../VinePart3")
+node_b = NodePath("../VinePart4")
+
+[node name="VinePart4" type="RigidBody2D" parent="." groups=["Wall"]]
+position = Vector2(-345, 727)
+linear_damp = 20.0
+angular_damp = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="VinePart4"]
+position = Vector2(49, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("4_je2tx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VinePart4"]
+position = Vector2(-194, -3)
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(39, 49, 61, 49, 63, 45, 66, 38, 66, 32, 67, 32, 70, 38, 76, 41, 78, 37, 77, 33, 74, 28, 67, 28, 67, 21, 65, 10, 60, -3, 52, -17, 52, -24, 55, -30, 56, -29, 58, -23, 62, -19, 70, -17, 72, -26, 67, -31, 63, -34, 56, -35, 57, -41, 56, -47, 43, -47, 40, -40, 38, -32, 34, -24, 34, -8, 35, -5, 28, 0, 25, 4, 23, 9, 23, 17, 27, 14, 32, 12, 35, 7, 38, 1, 41, 8, 43, 12, 45, 17, 44, 31, 41, 40, 39, 44)
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+position = Vector2(-287, 967)
+node_a = NodePath("../VinePart4")
+node_b = NodePath("../VinePart2")
+
+[node name="VinePart2" type="RigidBody2D" parent="." groups=["Wall"]]
+position = Vector2(-287, 1185)
+linear_damp = 20.0
+angular_damp = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="VinePart2"]
+position = Vector2(0, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("2_kn4x5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VinePart2"]
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(-10, -47, -10, -39, -6, -33, -4, -27, -5, -24, -8, -19, -8, -15, -12, -15, -13, -13, -20, -10, -21, -9, -23, -5, -23, 6, -19, 5, -19, 7, -22, 10, -23, 19, -19, 26, -14, 23, -13, 20, -13, 13, -17, 6, -17, 5, -14, 4, -11, 0, -10, -5, -11, -12, -11, -14, -8, -14, -7, -11, -3, -7, -2, -1, -5, 4, -7, 6, -7, 19, -3, 24, -3, 35, -7, 40, -8, 42, -11, 49, 8, 49, 8, 43, 10, 41, 11, 37, 11, 26, 6, 16, 5, 12, 8, 9, 11, 4, 13, -2, 12, -10, 6, -16, 6, -20, 7, -25, 10, -30, 10, -33, 13, -32, 18, -23, 20, -19, 25, -19, 23, -23, 22, -30, 18, -34, 11, -34, 10, -39, 9, -44, 9, -47)
+
+[node name="PinJoint2D5" type="PinJoint2D" parent="."]
+position = Vector2(-292, 1421)
+node_a = NodePath("../VinePart2")
+node_b = NodePath("../VinePart5")
+
+[node name="VinePart5" type="RigidBody2D" parent="." groups=["Wall"]]
+position = Vector2(-291, 1647)
+linear_damp = 20.0
+angular_damp = 50.0
+
+[node name="Sprite2D" type="Sprite2D" parent="VinePart5"]
+position = Vector2(0, 1)
+scale = Vector2(5, 5)
+texture = ExtResource("5_kn4x5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="VinePart5"]
+scale = Vector2(5, 5)
+polygon = PackedVector2Array(-10, -47, -10, -39, -6, -33, -4, -27, -5, -24, -8, -19, -8, -15, -12, -15, -13, -13, -18, -12.6, -21, -9, -23, -5, -23, 6, -19, 5, -19, 7, -22, 10, -23, 19, -19, 26, -14, 23, -13, 20, -13, 13, -17, 6, -17, 5, -14, 4, -11, 0, -10, -5, -11, -12, -11, -14, -8, -14, -7, -11, -3, -7, -2, -1, -5, 4, -7, 6, -7, 19, -3, 24, -3, 35, -0.599998, 41, 0.799999, 43.4, 1.4, 45, 5, 45, 6.4, 42.2, 8.6, 40.2, 11, 37, 11, 26, 6, 16, 5, 12, 8, 9, 11, 4, 13, -2, 12, -10, 6, -16, 6, -20, 7, -25, 10, -30, 10, -33, 13, -32, 18, -23, 20, -19, 25, -19, 23, -23, 22, -30, 18, -34, 11, -34, 10, -39, 9, -44, 9, -47)

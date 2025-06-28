@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://jibikt8joi7l" path="res://Assets/Branch/branch 4.png" id="1_yuxjs"]
 
-[node name="Branch4Left" type="StaticBody2D"]
+[node name="Branch4Left" type="StaticBody2D" groups=["Wall"]]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(-1, 1)
