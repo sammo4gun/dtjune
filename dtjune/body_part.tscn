@@ -7,10 +7,11 @@
 [node name="BodyPart" type="RigidBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_12r4b")
 
 [node name="MiddleOfTheCaterpillar" type="Sprite2D" parent="."]
 position = Vector2(-1.19209e-07, -2)
 rotation = 1.5708
-scale = Vector2(1.11625, 1.11625)
+scale = Vector2(1.72156, 1.72156)
 texture = ExtResource("1_lcuup")
