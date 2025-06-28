@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var head_thrust = 2000
 @export var head_linear_damp = 4.0
 @export var head_angular_damp = 4.0
 
@@ -19,12 +18,8 @@ var tail_joint = null
 
 var current_force = Vector2.ZERO
 
-var direction_multiplier = {
-	"up": 0.9,
-	"down": 0.3,
-	"left": 0.1,
-	"right": 0.1,
-}
+var max_head_thrust = 0
+var current_head_thrust = 0
 
 func _ready():
 	init_head()
@@ -32,7 +27,7 @@ func _ready():
 	init_tail()
 	
 	var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	head_thrust = get_total_mass() * gravity	
+	max_head_thrust = get_total_mass() * gravity	
 
 func get_total_mass() -> float:
 	var total_mass = head.mass + tail.mass
@@ -62,7 +57,6 @@ func init_tail():
 	joint.node_a = previous_link.get_path()
 	joint.node_b = tail.get_path()
 	add_child(joint)
-	
 
 func init_links():
 	for i in range(NUM_LINKS):
@@ -94,35 +88,44 @@ func _physics_process(delta):
 		input_direction.y -= 1
 
 	if input_direction != Vector2.ZERO:
-		var target_force = input_direction.normalized() * head_thrust
-		var acceleration_speed = 1.0
+		var target_force = input_direction.normalized() * current_head_thrust
+		var acceleration_speed = 3.0
 		current_force = current_force.lerp(target_force, delta * acceleration_speed)
 	else:
 		current_force = Vector2.ZERO
 
+	if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
+		attach_joint_to_candidate(head, "head_joint")
+
+	if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
+		attach_joint_to_candidate(tail, "tail_joint")
+
+	get_active_head()
+
 	if active_head:
 		active_head.apply_force(current_force)
 
+func get_active_head():
+	if self.get("head_joint") == null and self.get("tail_joint") != null:
+		current_head_thrust = max_head_thrust
+		active_head = head
+	elif self.get("tail_joint") == null and self.get("head_joint") != null:
+		current_head_thrust = max_head_thrust
+		active_head = tail
+	else:
+		current_head_thrust = max_head_thrust / 2
+		active_head = head
+		
+		
+
 func _input(event):
-	handle_grabbing(event)
+	handle_detatching(event)
 
-func handle_grabbing(event):
-	if event.is_action_pressed("stick_head"):
-		if attach_joint_to_candidate(head, "head_joint"):
-			active_head = tail
-
+func handle_detatching(event):
 	if event.is_action_released("stick_head"):
-		if active_head == tail:
-			active_head = null
 		detach_joint("head_joint")
-
-	if event.is_action_pressed("stick_tail"):
-		if attach_joint_to_candidate(tail, "tail_joint"):
-			active_head = head
-
+		
 	if event.is_action_released("stick_tail"):
-		if active_head == head:
-			active_head = null
 		detach_joint("tail_joint")
 
 func attach_joint_to_candidate(link_body: RigidBody2D, joint_name: String):
