@@ -1,19 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dte7eigdr34f7"]
+[gd_scene load_steps=8 format=3 uid="uid://dte7eigdr34f7"]
 
 [ext_resource type="Texture2D" uid="uid://chb6boemdjuc6" path="res://Assets/Caterpillar/middle of the caterpillar.png" id="1_lcuup"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lcuup"]
+friction = 0.17
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lcuup"]
 height = 22.6667
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_12r4b"]
 
+[sub_resource type="Curve" id="Curve_n6fsy"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.294118, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o7njo"]
+curve = SubResource("Curve_n6fsy")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lcuup"]
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 30.0
+radial_accel_max = 100.0
+scale_min = 0.5
+scale_max = 1.5
+alpha_curve = SubResource("CurveTexture_o7njo")
 
 [node name="BodyPart" type="RigidBody2D"]
-modulate = Color(0.66807, 0.78, 0.4602, 1)
 rotation = -1.5708
+physics_material_override = SubResource("PhysicsMaterial_lcuup")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(-2, -8.74228e-08)
@@ -27,12 +44,19 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_12r4b")
 
 [node name="MiddleOfTheCaterpillar" type="Sprite2D" parent="."]
-position = Vector2(-1.19209e-07, -2)
+position = Vector2(-1.086e-05, 3)
 rotation = 1.5708
 scale = Vector2(1.72156, 1.72156)
 texture = ExtResource("1_lcuup")
+flip_h = true
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-visible = false
+[node name="SpawnedEmitter" type="GPUParticles2D" parent="."]
+scale = Vector2(1.5, 1.5)
+emitting = false
+amount = 120
+lifetime = 1.4
+one_shot = true
+explosiveness = 1.0
 collision_base_size = 0.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_lcuup")

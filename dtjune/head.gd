@@ -39,6 +39,10 @@ func _physics_process(_delta):
 				tail_open_sprite.visible = false
 				tail_closed_sprite.visible = true
 
+func set_colour(color):
+	for sprite in [head_open_sprite, head_closed_sprite, head_happy_sprite, head_shocked_sprite, tail_open_sprite, tail_closed_sprite]:
+		sprite.self_modulate = color
+
 func start_eating(color):
 	if is_real_head:
 		head_open_sprite.visible = false

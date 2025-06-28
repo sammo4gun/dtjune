@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
-[ext_resource type="PackedScene" uid="uid://cl5pyckcfn0u1" path="res://Static Objects/flower.tscn" id="19_cvq6i"]
+[ext_resource type="PackedScene" path="res://Static Objects/flower.tscn" id="19_cvq6i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
 texture = ExtResource("2_2dftf")
@@ -256,71 +256,6 @@ sources/0 = SubResource("TileSetAtlasSource_bcbcq")
 [node name="World" type="Node2D"]
 script = ExtResource("1_js7pq")
 
-[node name="GroundFlowers" type="Node2D" parent="."]
-
-[node name="Flower2" parent="GroundFlowers" instance=ExtResource("19_cvq6i")]
-position = Vector2(4595, 4363)
-rotation = -0.132659
-
-[node name="Sprite2D2" parent="GroundFlowers/Flower2/Stalk" index="1"]
-flip_h = true
-
-[node name="Flower3" parent="GroundFlowers" instance=ExtResource("19_cvq6i")]
-position = Vector2(4610, 4462)
-rotation = -0.729875
-
-[node name="Sprite2D2" parent="GroundFlowers/Flower3/Stalk" index="1"]
-flip_h = true
-
-[node name="Flower4" parent="GroundFlowers" instance=ExtResource("19_cvq6i")]
-position = Vector2(4653, 4195)
-rotation = 0.473238
-
-[node name="Sprite2D2" parent="GroundFlowers/Flower4/Stalk" index="1"]
-rotation = -1.39393
-
-[node name="Branch5" type="StaticBody2D" parent="GroundFlowers" groups=["Wall"]]
-position = Vector2(4744, 4583)
-rotation = -1.82463
-scale = Vector2(0.8, 0.8)
-
-[node name="Sprite2D" type="Sprite2D" parent="GroundFlowers/Branch5"]
-position = Vector2(0, 2.5)
-rotation = 0.045768
-texture = ExtResource("9_fv4w7")
-flip_v = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundFlowers/Branch5"]
-position = Vector2(0, 2.5)
-rotation = 0.045768
-scale = Vector2(1, 1)
-polygon = PackedVector2Array(-442, 88, -442, 86.3, -444, 85.2, -444, -66.7, -398, -73.7, -398, -75, -313.9, -75, -237, -65.8, -237, -64.9, -200, -63.9, -200, -63.1, -162, -65, -112.4, -65, -80, -71.6, -80, -72.9, -34, -75, -14.7, -75, 34, -61.5, 34, -60.8, 61, -57.8, 61, -57, 147.9, -57, 221.8, -75, 251.3, -75, 325.3, -52, 329.5, -52, 345, -44.2, 345, -43.4, 389.4, -28, 393.6, -28, 404.6, -21, 406.6, -21, 407.3, -17.8, 383, -7.60001, 383, -6, 370.4, -6, 360.4, -2, 351.1, -2, 269.2, 18, 262.3, 18, 228, 32.3, 228, 33.6, 195, 40.7, 195, 41.8, 108.1, 50, 72.3, 50, 17, 68.5, 17, 69.7, -9, 74.7, -9, 76, -170, 74, -236.6, 74, -308, 86.8, -308, 88)
-
-[node name="GroundBranch" type="Node2D" parent="."]
-position = Vector2(2694, 5286)
-
-[node name="Branch2" parent="GroundBranch" instance=ExtResource("5_bah7m")]
-position = Vector2(0, 3)
-
-[node name="Branch4" type="StaticBody2D" parent="GroundBranch" groups=["Wall"]]
-position = Vector2(807, 48)
-scale = Vector2(0.8, 0.8)
-
-[node name="Sprite2D" type="Sprite2D" parent="GroundBranch/Branch4"]
-position = Vector2(0, 2.5)
-rotation = 0.045768
-texture = ExtResource("9_fv4w7")
-flip_v = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundBranch/Branch4"]
-position = Vector2(0, 2.5)
-rotation = 0.045768
-scale = Vector2(1, 1)
-polygon = PackedVector2Array(-442, 88, -442, 86.3, -444, 85.2, -444, -66.7, -398, -73.7, -398, -75, -313.9, -75, -237, -65.8, -237, -64.9, -200, -63.9, -200, -63.1, -162, -65, -112.4, -65, -80, -71.6, -80, -72.9, -34, -75, -14.7, -75, 34, -61.5, 34, -60.8, 61, -57.8, 61, -57, 147.9, -57, 221.8, -75, 251.3, -75, 325.3, -52, 329.5, -52, 345, -44.2, 345, -43.4, 389.4, -28, 393.6, -28, 404.6, -21, 406.6, -21, 407.3, -17.8, 383, -7.60001, 383, -6, 370.4, -6, 360.4, -2, 351.1, -2, 269.2, 18, 262.3, 18, 228, 32.3, 228, 33.6, 195, 40.7, 195, 41.8, 108.1, 50, 72.3, 50, 17, 68.5, 17, 69.7, -9, 74.7, -9, 76, -170, 74, -236.6, 74, -308, 86.8, -308, 88)
-
-[node name="Branch1" parent="GroundBranch" instance=ExtResource("10_kva58")]
-position = Vector2(1603, -371)
-
 [node name="Floor" type="StaticBody2D" parent="." groups=["Grabbable", "Wall"]]
 position = Vector2(2487, 5391)
 
@@ -333,7 +268,7 @@ tile_set = SubResource("TileSet_js7pq")
 shape = SubResource("WorldBoundaryShape2D_cmany")
 
 [node name="Fruit" parent="." instance=ExtResource("4_js7pq")]
-position = Vector2(3690, 5242)
+position = Vector2(3704, 5268)
 picked_type = 1
 
 [node name="Fruit2" parent="." instance=ExtResource("4_js7pq")]
@@ -341,15 +276,18 @@ position = Vector2(3195, 4802)
 picked_type = 4
 
 [node name="Fruit3" parent="." instance=ExtResource("4_js7pq")]
-position = Vector2(3033, 3758)
+position = Vector2(3174, 3675)
 picked_type = 8
 
 [node name="Fruit4" parent="." instance=ExtResource("4_js7pq")]
-position = Vector2(3715, 2468)
+position = Vector2(3805, 2433)
 picked_type = 16
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2194, 5340)
+position = Vector2(2897, 2388)
+
+[node name="Branch2" parent="." instance=ExtResource("5_bah7m")]
+position = Vector2(2694, 5286)
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 
@@ -381,12 +319,29 @@ motion_mirroring = Vector2(10000, 0)
 texture = ExtResource("10_f5c0m")
 centered = false
 
+[node name="Vine" parent="." instance=ExtResource("11_kva58")]
+position = Vector2(2921, 3067)
+
+[node name="Branch4" type="StaticBody2D" parent="." groups=["Wall"]]
+position = Vector2(3501, 5334)
+scale = Vector2(0.8, 0.8)
+
+[node name="Sprite2D" type="Sprite2D" parent="Branch4"]
+texture = ExtResource("9_fv4w7")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Branch4"]
+position = Vector2(-448, -91)
+polygon = PackedVector2Array(135, -2, -2, -4, 0, 163, 54, 173, 142, 170, 267, 160, 346, 166, 426, 172, 509, 155, 509, 155, 593, 152, 670, 168, 698, 169, 881, 107, 829, 94, 749, 76, 696, 61, 643, 45, 600, 36, 521, 37, 442, 9, 281, 11, 212, 12)
+
+[node name="Branch1" parent="." instance=ExtResource("10_kva58")]
+position = Vector2(4297, 4915)
+
 [node name="Branch4Left" parent="." instance=ExtResource("7_fvag4")]
 position = Vector2(2729, 4871)
 rotation = 0.179505
 
 [node name="BigBranch" type="Node2D" parent="."]
-position = Vector2(3597, 4978)
+position = Vector2(3614, 5032)
 rotation = 0.179505
 
 [node name="Branch7" parent="BigBranch" instance=ExtResource("4_wygdx")]
@@ -404,7 +359,7 @@ rotation = -0.367869
 scale = Vector2(0.9, 0.9)
 
 [node name="BigBranch2" type="Node2D" parent="."]
-position = Vector2(4408, 2239)
+position = Vector2(4500, 2212)
 scale = Vector2(0.9, 0.9)
 
 [node name="Branch8" parent="BigBranch2" instance=ExtResource("4_wygdx")]
@@ -416,9 +371,6 @@ scale = Vector2(1.11111, 1.11111)
 [node name="CollisionPolygon2D" parent="BigBranch2/Branch9" index="1"]
 polygon = PackedVector2Array(-450, -28, -345, -29, -258, -61, -107, -62, -65, -56, -68, -50, -109, -45, -149, -30, -235, -25, -274, -3, -238, -3, -219, -10, -182, -10, -103, -7, -94, 1, -57, -1, -35, -2, -15, -2, 2, -5, 43, -7, 60, -8, 90, -6, 133, -21, 175, -20, 213, -13, 232, -4, 321, -3, 335, 7, 332, 12, 286, 28, 188, 25, 140, 43, 89, 53, 152, 61, 273, 70, 322, 82, 369, 83, 396, 98, 397, 108, 316, 110, 4, 110, -74, 101, -244, 103, -405, 107, -450, 111)
 
-[node name="Vine" parent="." instance=ExtResource("11_kva58")]
-position = Vector2(3012, 3162)
-
 [node name="Branch5" parent="." instance=ExtResource("13_b2ar6")]
 position = Vector2(3614, 5032)
 rotation = 0.179505
@@ -427,13 +379,13 @@ rotation = 0.179505
 position = Vector2(2060, 4118)
 
 [node name="TrunkLeft" parent="." instance=ExtResource("11_f5c0m")]
-position = Vector2(4795, 4898)
+position = Vector2(4950, 4898)
 
 [node name="TrunkLeft2" parent="." instance=ExtResource("11_f5c0m")]
-position = Vector2(4821, 3900)
+position = Vector2(4976, 3900)
 
 [node name="TrunkLeft3" parent="." instance=ExtResource("11_f5c0m")]
-position = Vector2(4846, 2900)
+position = Vector2(5001, 2900)
 
 [node name="Branch5Left" parent="." instance=ExtResource("18_sjtuv")]
 position = Vector2(4535, 1934)
@@ -457,29 +409,25 @@ rotation = 0.146396
 position = Vector2(1829, 4894)
 
 [node name="Branch6" parent="." instance=ExtResource("16_1fphk")]
-position = Vector2(4153, 3982)
+position = Vector2(4200, 3946)
 scale = Vector2(0.9, 0.9)
 
 [node name="Branch3Left" parent="." instance=ExtResource("17_sjtuv")]
-position = Vector2(3300, 3934)
+position = Vector2(3347, 3898)
 
 [node name="Branch10" parent="." instance=ExtResource("13_b2ar6")]
 position = Vector2(3549, 1255)
 rotation = 0.356647
 
 [node name="TrunkLeft4" parent="." instance=ExtResource("11_f5c0m")]
-position = Vector2(4875, 1907)
+position = Vector2(5030, 1907)
 
 [node name="TrunkLeft5" parent="." instance=ExtResource("11_f5c0m")]
-position = Vector2(4896, 916)
+position = Vector2(5051, 916)
 
 [node name="Flower" parent="." instance=ExtResource("19_cvq6i")]
 position = Vector2(3996, 1358)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(2219, 5205)
 
-[editable path="GroundFlowers/Flower2"]
-[editable path="GroundFlowers/Flower3"]
-[editable path="GroundFlowers/Flower4"]
 [editable path="BigBranch2/Branch9"]
