@@ -1,3 +1,18 @@
-[gd_scene format=3 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=3 format=3 uid="uid://bbq0b4ceveffm"]
+
+[ext_resource type="Script" uid="uid://dwbdjcbd7d7fm" path="res://player.gd" id="1_2dftf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dftf"]
+size = Vector2(378.25, 57)
 
 [node name="World" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(143, 14)
+script = ExtResource("1_2dftf")
+
+[node name="Platform" type="StaticBody2D" parent="." groups=["Wall"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(153, 223)
+shape = SubResource("RectangleShape2D_2dftf")
