@@ -15,8 +15,11 @@ const COLOUR_DICT = {
 	"white": Color8(155, 155, 155),
 	"red": Color8(206, 21, 0),
 	"yellow": Color8(209, 218, 0),
-	"blue": Color8(209, 218, 0),
+	"blue": Color8(28, 219, 240),
 	"orange": Color8(221, 118, 4),
+	"violet": Color8(143, 0, 255),
+	"purple": Color8(127, 0, 255),
+	"green": Color8(1, 130, 32),
 }
 
 var previous_link = null
@@ -35,8 +38,8 @@ var current_head_thrust = 0
 
 var target_rotation = {}
 
-var NUM_LINKS = 1
-var COLOUR_LIST = ['white']
+var NUM_LINKS = 4
+var COLOUR_LIST = ['white', 'white', 'white', 'white']
 var RESPAWNED = false
 
 func _ready():
