@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c8arbucqopsgm"]
+[gd_scene load_steps=22 format=3 uid="uid://c8arbucqopsgm"]
 
 [ext_resource type="Script" uid="uid://c4ogtft3wpc3l" path="res://head.gd" id="1_xe7ry"]
 [ext_resource type="Texture2D" uid="uid://gdl7a77ebxlm" path="res://Assets/Caterpillar/caterpillar head talons closed.png" id="2_hukeq"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://b2f8cimqkddet" path="res://Assets/Caterpillar/caterpillar shocked .png" id="5_rwjvo"]
 [ext_resource type="Texture2D" uid="uid://rcreaiilx3tx" path="res://Assets/Caterpillar/caterpillar happy.png" id="6_hbaeg"]
 [ext_resource type="Texture2D" uid="uid://drgiqdq143f71" path="res://Assets/FoodMorsels.png" id="6_mkt57"]
+[ext_resource type="AudioStream" uid="uid://btfehxm6kix87" path="res://Audio/eating.mp3" id="9_hbaeg"]
+[ext_resource type="AudioStream" uid="uid://coudkv2alhobe" path="res://Audio/pain.mp3" id="10_iihrl"]
+[ext_resource type="AudioStream" uid="uid://bxa65r7utckc" path="res://Audio/slap.mp3" id="10_jmvna"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwjvo"]
 friction = 0.25
@@ -174,5 +177,17 @@ texture = ExtResource("5_7nidb")
 flip_h = true
 
 [node name="AimDetectors" type="Node2D" parent="."]
+
+[node name="Eating" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_hbaeg")
+volume_db = -6.303
+
+[node name="Pain" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_iihrl")
+volume_db = -10.855
+
+[node name="Slap" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_jmvna")
+volume_db = -12.956
 
 [connection signal="area_entered" from="GrabFinder" to="." method="_on_grab_finder_area_entered"]

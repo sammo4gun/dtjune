@@ -31,6 +31,7 @@ var prev_grabbing = false
 var grabparticles
 var bramble_colliding = false
 var bramble_collision_normal = null
+var slapped = false
 
 func _ready() -> void:
 	setup_rays(num_rays)
@@ -51,19 +52,30 @@ func setup_rays(i):
 func _physics_process(_delta):
 	stick_candidate = null
 	bramble_colliding = false
+	var walls_colliding = false
 	
 	var colliding_bodies = $GrabFinder.get_overlapping_bodies()
 	if colliding_bodies.size() > 0:
-		for body in colliding_bodies:# Perform actions based on the colliding body, e.g.,
+		for body in colliding_bodies:
 			if body.is_in_group("Wall"):
+				walls_colliding = true
 				stick_candidate = body;
+				if(!slapped):
+					slapped = true
+					$Slap.play()
+					
 				break;
 			if body.is_in_group("Bramble"):
 				bramble_collision_normal = (global_position - body.global_position).normalized()
 				bramble_colliding = true
+				if(!slapped):
+					$Pain.play()
 				break;
 	
 		var all_collision_points := []
+	
+	if(!walls_colliding):
+		slapped = false
 
 	
 	if not $EatingParticles.emitting:
@@ -133,6 +145,7 @@ func set_colour(color):
 
 func start_eating(color):
 	if is_real_head:
+		$Eating.play()
 		head_open_sprite.visible = false
 		head_closed_sprite.visible = false
 		$EatingParticles.modulate = color

@@ -1,6 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://xwr3l0s3uhd"]
+[gd_scene load_steps=6 format=3 uid="uid://xwr3l0s3uhd"]
 
 [ext_resource type="Script" uid="uid://dwbdjcbd7d7fm" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="AudioStream" uid="uid://n560fyaimoe2" path="res://Audio/grab.mp3" id="2_onrkg"]
+[ext_resource type="AudioStream" uid="uid://ce0rtuay8up65" path="res://Audio/zoomedintransition.mp3" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://1356yjii7qq3" path="res://Audio/posttransitionrelief.mp3" id="4_hqtel"]
+[ext_resource type="AudioStream" uid="uid://w8c10ewqi5m6" path="res://Audio/twinkle.mp3" id="5_sweqy"]
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_4flbx")
+
+[node name="Grab" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_onrkg")
+volume_db = -4.217
+
+[node name="TransitionAnxiety" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i3pqv")
+volume_db = -4.257
+
+[node name="TransitionRelief" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hqtel")
+max_polyphony = 3
+
+[node name="Twinkle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_sweqy")
+volume_db = -5.657
