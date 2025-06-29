@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=34 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -29,6 +29,7 @@
 [ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
 [ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
 [ext_resource type="PackedScene" path="res://cocoon.tscn" id="28_rhl3w"]
+[ext_resource type="Texture2D" uid="uid://53ag7yl7nved" path="res://Assets/UI/YouDidIt.png" id="29_bun23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
 texture = ExtResource("2_2dftf")
@@ -306,6 +307,12 @@ rotation = -1.79835
 scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 flip_h = true
+
+[node name="Sign10" type="Sprite2D" parent="Signs"]
+position = Vector2(-1268.71, 496.596)
+rotation = -1.12149
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("22_5j71u")
 
 [node name="Sign7" type="Sprite2D" parent="Signs"]
 position = Vector2(-4346.25, 927.079)
@@ -637,8 +644,12 @@ rotation = 0.597831
 [node name="RightTrunk" type="Node2D" parent="."]
 position = Vector2(4527, 2097)
 
+[node name="TrunkLeft10" parent="RightTrunk" instance=ExtResource("11_f5c0m")]
+position = Vector2(1949, -4963)
+rotation = 0.188049
+
 [node name="TrunkLeft9" parent="RightTrunk" instance=ExtResource("11_f5c0m")]
-position = Vector2(1537, -4148)
+position = Vector2(1662, -4148)
 rotation = 0.398618
 
 [node name="TrunkLeft8" parent="RightTrunk" instance=ExtResource("11_f5c0m")]
@@ -670,6 +681,19 @@ position = Vector2(369, -1181)
 
 [node name="LeftTrunk" type="Node2D" parent="."]
 position = Vector2(4527, 2097)
+
+[node name="Trunk14" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
+position = Vector2(-2634, -4969)
+rotation = 0.0239946
+
+[node name="Trunk13" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
+position = Vector2(-2487, -4278)
+rotation = -0.147007
+scale = Vector2(1, 1)
+
+[node name="Trunk12" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
+position = Vector2(-2328, -3550)
+rotation = -0.147007
 
 [node name="Trunk11" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-2016, -2865)
@@ -765,14 +789,20 @@ rotation = -2.89859
 rotation = 0.0
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(3229, -2785)
+position = Vector2(2120, 5224)
 
 [node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
 z_index = 1
 position = Vector2(3761, -846)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(2219, 5205)
+position = Vector2(2276, 5093)
+
+[node name="YouDidIt" type="Sprite2D" parent="Camera2D"]
+visible = false
+self_modulate = Color(1, 0.360784, 1, 1)
+position = Vector2(0, 1)
+texture = ExtResource("29_bun23")
 
 [node name="Bramble" parent="." instance=ExtResource("21_0to5b")]
 position = Vector2(4817, 3236)

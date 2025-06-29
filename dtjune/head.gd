@@ -90,8 +90,6 @@ func _physics_process(delta):
 				in_cocoon = true
 				break;
 	
-		var all_collision_points := []
-	
 	if(!walls_colliding):
 		slapped = false
 
@@ -163,13 +161,10 @@ func get_mood_sprite():
 
 func handle_bramble():
 	bramble_colliding = false
-	var dist_list = []
 	for ray in raylist:
 		if ray.is_colliding():
 			var collider = ray.get_collider()
 			if collider.is_in_group("Bramble"):
-				
-				var collision_point = ray.get_collision_point()
 				bramble_collision_normal = ray.get_collision_normal()
 				
 

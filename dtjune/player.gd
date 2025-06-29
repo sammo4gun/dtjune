@@ -149,7 +149,6 @@ func _physics_process(delta):
 	if active_head:
 		if active_head.bramble_colliding:
 			var rebound_force = active_head.bramble_collision_normal * 20000
-			var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
 			active_head.apply_force(rebound_force) 
 		else:
 			active_head.apply_force(current_force)
@@ -160,6 +159,7 @@ func _physics_process(delta):
 		get_parent().zoom_in_cocoon()
 		get_parent().fade_background_to_white(0.15)
 		await get_tree().create_timer(7.5).timeout
+		get_parent().show_ui("final")
 		get_tree().get_first_node_in_group("JustTheActualCocoon").close_up()
 		get_parent().fade_background_to_clear(1);
 		get_parent().zoom_out()
