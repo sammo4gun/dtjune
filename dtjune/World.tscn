@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=27 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://cl5pyckcfn0u1" path="res://Static Objects/flower.tscn" id="19_cvq6i"]
 [ext_resource type="PackedScene" uid="uid://svwhlc8q70wh" path="res://bramble.tscn" id="21_0to5b"]
+[ext_resource type="PackedScene" uid="uid://cc5u8trdkwfim" path="res://cocoon.tscn" id="22_5j71u"]
+[ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
 texture = ExtResource("2_2dftf")
@@ -348,7 +350,7 @@ position = Vector2(3715, 2468)
 picked_type = 16
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(4680, 3746)
+position = Vector2(4575, 3710)
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 
@@ -481,6 +483,19 @@ position = Vector2(2219, 5205)
 [node name="Bramble" parent="." instance=ExtResource("21_0to5b")]
 position = Vector2(4817, 3236)
 rotation = 1.54034
+
+[node name="Cocoon" parent="." instance=ExtResource("22_5j71u")]
+position = Vector2(3972, 3475)
+
+[node name="WhiteFade" type="ColorRect" parent="."]
+offset_left = -628.0
+offset_top = -780.0
+offset_right = 6824.0
+offset_bottom = 6249.0
+color = Color(1, 1, 1, 0)
+
+[node name="TransitionSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_jyqkj")
 
 [editable path="GroundFlowers/Flower2"]
 [editable path="GroundFlowers/Flower3"]

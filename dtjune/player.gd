@@ -34,8 +34,10 @@ var current_head_thrust = 0
 
 var target_rotation = {}
 
-var NUM_LINKS = 1
-var COLOUR_LIST = ['white']
+var transitioning = false
+
+var NUM_LINKS = 8
+var COLOUR_LIST = ['white','white','white','white','white','white','white','white']
 var RESPAWNED = false
 
 func _ready():
@@ -145,6 +147,15 @@ func _physics_process(delta):
 		else:
 			active_head.apply_force(current_force)
 	handle_head_sprites()
+	
+	if head.in_cocoon and tail.in_cocoon and !transitioning:
+		transitioning = true
+		get_parent().zoom_in_cocoon()
+		get_parent().fade_background_to_white(0.15)
+		await get_tree().create_timer(7.5).timeout
+		get_tree().get_first_node_in_group("JustTheActualCocoon").close_up()
+		get_parent().fade_background_to_clear(1);
+		get_parent().zoom_out()
 
 func handle_head_sprites():
 	if Input.is_action_pressed("stick_head"):
