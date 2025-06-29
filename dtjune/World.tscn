@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=35 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -14,11 +14,12 @@
 [ext_resource type="Texture2D" uid="uid://dgphqu5xtt7ih" path="res://Assets/Background/1st background.png" id="10_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
 [ext_resource type="Texture2D" uid="uid://csio4e3ee87l3" path="res://Assets/Background/4 - sky.png" id="11_c2gv2"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
+[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
+[ext_resource type="Texture2D" uid="uid://chnng1vjijdwy" path="res://Assets/Objects/mushroom.png" id="16_gtthi"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://cl5pyckcfn0u1" path="res://Static Objects/flower.tscn" id="19_cvq6i"]
@@ -27,8 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://dsq5h4o0k7llb" path="res://Static Objects/branch_2.tscn" id="21_d7dfr"]
 [ext_resource type="Texture2D" uid="uid://clr1aqi8wc1aa" path="res://Assets/Objects/sign left.png" id="22_5j71u"]
 [ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
-[ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
-[ext_resource type="PackedScene" uid="uid://eikpbeh754jf" path="res://cocoon.tscn" id="28_rhl3w"]
+[ext_resource type="PackedScene" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
+[ext_resource type="PackedScene" uid="uid://cc5u8trdkwfim" path="res://cocoon.tscn" id="28_rhl3w"]
 [ext_resource type="Texture2D" uid="uid://53ag7yl7nved" path="res://Assets/UI/YouDidIt.png" id="29_bun23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
@@ -314,8 +315,20 @@ rotation = -1.12149
 scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 
+[node name="Sign11" type="Sprite2D" parent="Signs"]
+position = Vector2(-2969.32, 129.639)
+rotation = -1.12149
+scale = Vector2(0.126, -0.126)
+texture = ExtResource("22_5j71u")
+
+[node name="Sign7" type="Sprite2D" parent="Signs"]
+position = Vector2(-4841.38, 1329.83)
+rotation = -2.98113
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("22_5j71u")
+
 [node name="Sign8" type="Sprite2D" parent="Signs"]
-position = Vector2(-3918.52, 1369.31)
+position = Vector2(-4260.35, 1522.97)
 rotation = -0.998361
 scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("3_jyqkj")
@@ -428,7 +441,7 @@ position = Vector2(4791, 90)
 picked_type = 32
 
 [node name="Fruit7" parent="." instance=ExtResource("4_js7pq")]
-position = Vector2(2996, -692)
+position = Vector2(3048, -1024)
 picked_type = 64
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
@@ -474,6 +487,17 @@ centered = false
 
 [node name="Vine" parent="." instance=ExtResource("11_kva58")]
 position = Vector2(2965, 3292)
+
+[node name="Mushroom" type="StaticBody2D" parent="." groups=["Wall"]]
+position = Vector2(-295, -153)
+rotation = -0.124964
+
+[node name="Sprite2D" type="Sprite2D" parent="Mushroom"]
+position = Vector2(3442, -253)
+texture = ExtResource("16_gtthi")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Mushroom"]
+polygon = PackedVector2Array(3318, -43, 3325, -67, 3352, -94, 3359, -133, 3277, -145, 3231, -158, 3204, -192, 3207, -222, 3250, -255, 3289, -318, 3336, -379, 3375, -395, 3417, -401, 3477, -389, 3498, -381, 3540, -327, 3579, -290, 3642, -251, 3670, -216, 3667, -184, 3638, -167, 3532, -135, 3561, -55, 3532, -25, 3500, -25, 3434, -24, 3384, -21, 3339, -28)
 
 [node name="Branch5Left" parent="." instance=ExtResource("18_sjtuv")]
 position = Vector2(4527, 2097)
@@ -683,14 +707,13 @@ rotation = 0.0239946
 [node name="Trunk13" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-2487, -4278)
 rotation = -0.147007
-scale = Vector2(1, 1)
 
 [node name="Trunk12" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
-position = Vector2(-2328, -3550)
-rotation = -0.147007
+position = Vector2(-2369, -3706)
+rotation = -0.242717
 
 [node name="Trunk11" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
-position = Vector2(-2016, -2865)
+position = Vector2(-2018, -2908)
 rotation = -0.4829
 
 [node name="Trunk10" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
@@ -740,8 +763,8 @@ position = Vector2(765.69, 850.715)
 rotation = 0.965814
 
 [node name="Bramble10" parent="Brambles" instance=ExtResource("21_0to5b")]
-position = Vector2(2188.06, 646.606)
-rotation = 3.04385
+position = Vector2(2183.45, 594.726)
+rotation = 3.18891
 
 [node name="Bramble11" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(-1857.63, -314.671)
@@ -771,6 +794,14 @@ rotation = -2.06789
 position = Vector2(685.8, 500.019)
 rotation = -2.35993
 
+[node name="Bramble13" parent="Brambles" instance=ExtResource("21_0to5b")]
+position = Vector2(3908.14, -152.996)
+rotation = -3.43795
+
+[node name="Bramble14" parent="Brambles" instance=ExtResource("21_0to5b")]
+position = Vector2(3859.85, 3458.23)
+rotation = -2.78106
+
 [node name="Bramble" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(-852.332, 2555.6)
 rotation = 3.08019
@@ -783,17 +814,11 @@ rotation = -2.89859
 rotation = 0.0
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2148, 5333)
+position = Vector2(2101, 5273)
 
 [node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
 z_index = 1
-position = Vector2(3761, -846)
-
-[node name="Sign7" type="Sprite2D" parent="Cocoon"]
-position = Vector2(-26, -248)
-rotation = -1.44079
-scale = Vector2(0.126152, 0.126152)
-texture = ExtResource("22_5j71u")
+position = Vector2(3343.36, -1328.64)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2276, 5093)
@@ -810,14 +835,114 @@ rotation = 1.54034
 
 [node name="WhiteFade" type="ColorRect" parent="."]
 z_index = 1
-offset_left = -628.0
-offset_top = -2839.0
-offset_right = 6932.0
-offset_bottom = 6249.0
+offset_left = -107.0
+offset_top = -3661.0
+offset_right = 7453.0
+offset_bottom = 5427.0
 color = Color(1, 1, 1, 0)
 
 [node name="TransitionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_jyqkj")
+volume_db = -5.0
+
+[node name="Brown" type="ColorRect" parent="."]
+offset_left = -2126.0
+offset_right = 1592.0
+offset_bottom = 5407.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -3371.0
+offset_right = 3790.0
+offset_bottom = 2036.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown"]
+layout_mode = 0
+offset_left = 8765.0
+offset_top = 86.0
+offset_right = 12483.0
+offset_bottom = 5493.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = -1693.0
+offset_top = 6690.0
+offset_right = 1968.0
+offset_bottom = 8693.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = -1000.0
+offset_right = 3698.0
+offset_bottom = 6.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = -986.0
+offset_right = 3692.0
+offset_bottom = 20.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -818.0
+offset_right = 3687.0
+offset_bottom = 188.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 1668.0
+offset_top = -3517.0
+offset_right = 5329.0
+offset_bottom = 506.0
+rotation = 0.431302
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = -5012.42
+offset_top = 2271.48
+offset_right = -1351.42
+offset_bottom = 6294.48
+rotation = 0.685315
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = -45.9137
+offset_top = -361.825
+offset_right = 3615.09
+offset_bottom = 3661.17
+rotation = 0.23214
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 3685.36
+offset_top = -358.207
+offset_right = 7346.36
+offset_bottom = 3664.79
+rotation = 0.541364
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 4432.35
+offset_top = -167.919
+offset_right = 8093.35
+offset_bottom = 3855.08
+rotation = 1.39894
+color = Color(0.560784, 0.337255, 0.231373, 1)
 
 [editable path="GroundFlowers/Flower2"]
 [editable path="GroundFlowers/Flower3"]
