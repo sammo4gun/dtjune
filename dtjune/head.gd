@@ -38,6 +38,7 @@ var prev_grabbing = false
 var bramble_colliding = false
 var bramble_collision_normal = null
 var slapped = false
+var in_cocoon = false
 
 var mood = "neutral"
 var time = 0
@@ -61,6 +62,7 @@ func _physics_process(delta):
 	if is_real_head: get_mood_sprite()
 	stick_candidate = null
 	bramble_colliding = false
+	in_cocoon = false
 	var walls_colliding = false
 	
 	var colliding_bodies = $GrabFinder.get_overlapping_bodies()
@@ -80,6 +82,15 @@ func _physics_process(delta):
 				if(!slapped):
 					$Pain.play()
 				break;
+	
+	var colliding_areas = $GrabFinder.get_overlapping_areas()
+	if colliding_areas.size() > 0:
+		for area in colliding_areas:
+			if area.is_in_group("Cocoon"):
+				in_cocoon = true
+				break;
+	
+		var all_collision_points := []
 	
 	if(!walls_colliding):
 		slapped = false

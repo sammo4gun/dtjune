@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://cc5u8trdkwfim"]
+
+[ext_resource type="Script" uid="uid://j1miysbd88xy" path="res://cocoon.gd" id="1_1ua0w"]
+[ext_resource type="Texture2D" uid="uid://cgqguewvbu8q2" path="res://Assets/cocoon.png" id="1_kck0u"]
+
+[sub_resource type="Gradient" id="Gradient_1ua0w"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_do65w"]
+gradient = SubResource("Gradient_1ua0w")
+
+[sub_resource type="Gradient" id="Gradient_kck0u"]
+offsets = PackedFloat32Array(0.0507099, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1ua0w"]
+gradient = SubResource("Gradient_kck0u")
+fill = 1
+
+[node name="Cocoon" type="StaticBody2D" groups=["JustTheActualCocoon", "Wall"]]
+script = ExtResource("1_1ua0w")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-35.2014, -172.781)
+rotation = 0.855081
+scale = Vector2(1.63328, 1.8)
+energy = 1.54
+texture = SubResource("GradientTexture2D_do65w")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-70, -200)
+rotation = 3.05374
+scale = Vector2(2.64076, 2.64076)
+texture = SubResource("GradientTexture2D_1ua0w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+texture = ExtResource("1_kck0u")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+light_mask = 3
+polygon = PackedVector2Array(21, -248, 2, -248, 3, -237, 8, -224, 9, -198, 14, -191, 40, -193, 74, -109, 94, 1, 92, 67, -51, 72, -63, 20, -61, -54, -26, -96, -59, -121, -68, -87, -73, -21, -72, 22, -56, 96, -24, 140, 26, 137, 66, 122, 98, 86, 105, 41, 102, -27, 88, -98, 73, -154, 52, -196, 32, -221)
+
+[node name="Area2D" type="Area2D" parent="." groups=["Cocoon"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-49, -107, -60, 3, -41, 98, -15, 127, 35, 123, 91, 72, 90, -13, 72, -115, 46, -179, 23, -193, -32, -162)
