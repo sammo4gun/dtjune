@@ -3,6 +3,8 @@ extends Node2D
 @onready var camera = $"Camera2D"
 @onready var player = $"Player"
 
+@onready var ui_final = $"Camera2D/YouDidIt"
+
 var player_scene = preload("res://player.tscn")
 
 var camera_position = Vector2(0,0)
@@ -15,10 +17,16 @@ var fading_out = false;
 var zoom_speed = 1
 
 func _physics_process(delta: float) -> void:
+	var target_pos
+	
 	if player:
-		camera.position = camera.position.lerp(player.get_camera_pos(), delta * 2.5)
+		target_pos = player.get_camera_pos()
 	else:
-		camera.position = camera.position.lerp(camera_position, delta * 2.5)
+		target_pos = camera_position
+	
+	target_pos.y = max(-2973.0, target_pos.y)
+	
+	camera.position = camera.position.lerp(target_pos, delta * 2.5)
 	
 	if camera.zoom != camera_target_zoom:
 		camera.zoom = camera.zoom.lerp(camera_target_zoom, delta * zoom_speed)
@@ -67,6 +75,10 @@ func grow_butterfy():
 	player.global_position = player_pos + Vector2(0, -35)
 	add_child(player)
  
+func show_ui(type):
+	if type == "final":
+		ui_final.visible = true
+
 func grow_player(size, colours, new_colour):
 	var player_pos = player.head.global_position
 	var player_upside_down = player.head.global_rotation > 0

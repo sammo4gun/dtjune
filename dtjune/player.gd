@@ -14,9 +14,12 @@ const COLOUR_DICT = {
 	"base": Color8(133, 194, 21),
 	"white": Color8(155, 155, 155),
 	"red": Color8(206, 21, 0),
+	"green": Color8(1, 130, 32),
 	"yellow": Color8(209, 218, 0),
-	"blue": Color8(209, 218, 0),
+	"blue": Color8(28, 219, 240),
 	"orange": Color8(221, 118, 4),
+	"violet": Color8(247, 147, 177),
+	"purple": Color8(127, 0, 255),
 }
 
 var previous_link = null
@@ -72,9 +75,9 @@ func _ready():
 			$Twinkle.play()
 			for i in link_array:
 				i.get_child(3).emitting = true
-				head.mood = "content"
-				await get_tree().create_timer(0.8).timeout
-				head.mood = "neutral"
+			head.mood = "content"
+			await get_tree().create_timer(0.8).timeout
+			head.mood = "neutral"
 			
 		var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 		max_head_thrust = get_total_mass() * gravity	
@@ -187,7 +190,7 @@ func _physics_process(delta):
 			get_parent().zoom_in_cocoon()
 			get_parent().fade_background_to_white(0.15)
 			await get_tree().create_timer(7.5).timeout
-			
+			get_parent().show_ui("final")
 			get_parent().grow_butterfy()
 			get_tree().get_first_node_in_group("JustTheActualCocoon").close_up()
 			get_parent().fade_background_to_clear(1);
