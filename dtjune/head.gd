@@ -29,6 +29,8 @@ var seeking = false
 var grabbing = false
 var prev_grabbing = false
 var grabparticles
+var bramble_colliding = false
+var bramble_collision_normal = null
 
 func _ready() -> void:
 	setup_rays(num_rays)
@@ -48,6 +50,7 @@ func setup_rays(i):
 
 func _physics_process(_delta):
 	stick_candidate = null
+	bramble_colliding = false
 	
 	var colliding_bodies = $GrabFinder.get_overlapping_bodies()
 	if colliding_bodies.size() > 0:
@@ -55,8 +58,13 @@ func _physics_process(_delta):
 			if body.is_in_group("Wall"):
 				stick_candidate = body;
 				break;
+			if body.is_in_group("Bramble"):
+				bramble_collision_normal = (global_position - body.global_position).normalized()
+				bramble_colliding = true
+				break;
 	
 		var all_collision_points := []
+
 	
 	if not $EatingParticles.emitting:
 		if seeking:
@@ -82,6 +90,18 @@ func _physics_process(_delta):
 		for s in sprite_base_rotations:
 			s.rotation = lerp_angle(s.rotation, sprite_base_rotations[s], 0.3)
 	prev_grabbing = grabbing
+
+func handle_bramble():
+	bramble_colliding = false
+	var dist_list = []
+	for ray in raylist:
+		if ray.is_colliding():
+			var collider = ray.get_collider()
+			if collider.is_in_group("Bramble"):
+				
+				var collision_point = ray.get_collision_point()
+				bramble_collision_normal = ray.get_collision_normal()
+				
 
 func handle_sprite_grabs():
 	var dist_list = []
