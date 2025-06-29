@@ -33,6 +33,7 @@ func grow_player(size, colours, new_colour):
 	player.NUM_LINKS = size + 1
 	player.COLOUR_LIST = colours + [new_colour]
 	player.RESPAWNED = true
+	
 	player.global_position = player_pos + Vector2(0, -35)
 	add_child(player)
  

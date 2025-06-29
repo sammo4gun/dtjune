@@ -45,6 +45,8 @@ func _ready():
 	init_tail()
 	init_colours()
 	if RESPAWNED:
+		$TransitionRelief.play()
+		$Twinkle.play()
 		for i in link_array:
 			i.get_child(3).emitting = true
 			head.mood = "content"
@@ -141,8 +143,6 @@ func _physics_process(delta):
 	get_active_head()
 	if active_head:
 		if active_head.bramble_colliding:
-			#var force_strength = velocity.length()  # Or a custom bounce factor
-			
 			var rebound_force = active_head.bramble_collision_normal * 20000
 			var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
 			active_head.apply_force(rebound_force) 
@@ -202,6 +202,10 @@ func attach_joint_to_candidate(link_body: RigidBody2D, joint_name: String):
 	add_child(joint)
 	self.set(joint_name, joint)
 	
+	if not $Grab.playing:
+		$Grab.pitch_scale = randf_range(0.9, 1.3)
+		$Grab.play()
+	
 	return true
 
 func detach_joint(joint_name: String):
@@ -221,6 +225,8 @@ func eat_fruit(fruit):
 	await get_tree().create_timer(2.5).timeout
 	head.stop_eating()
 	get_parent().zoom_in()
+	$TransitionAnxiety.play()
 	await get_tree().create_timer(1.5).timeout
 	get_parent().grow_player(NUM_LINKS, COLOUR_LIST, li[0])
 	get_parent().zoom_out()
+	
