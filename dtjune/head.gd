@@ -27,9 +27,15 @@ var raylist = []
 
 var seeking = false
 var grabbing = false
+var prev_grabbing = false
+var grabparticles
 
 func _ready() -> void:
 	setup_rays(num_rays)
+	if is_real_head:
+		grabparticles = $"GrabParticlesHandler/GrabParticlesHead"
+	else: 
+		grabparticles = $"GrabParticlesHandler/GrabParticlesTail"
 
 func setup_rays(i):
 	for r in range(i):
@@ -69,10 +75,13 @@ func _physics_process(_delta):
 				tail_closed_sprite.visible = true
 	
 	if grabbing:
+		if grabbing != prev_grabbing:
+			grab()
 		handle_sprite_grabs()
 	else:
 		for s in sprite_base_rotations:
 			s.rotation = lerp_angle(s.rotation, sprite_base_rotations[s], 0.3)
+	prev_grabbing = grabbing
 
 func handle_sprite_grabs():
 	var dist_list = []
@@ -115,6 +124,33 @@ func stop_eating():
 		head_happy_sprite.visible = false
 		head_shocked_sprite.visible = true
 		$EatingParticles.emitting = false
+
+func grab():
+	print('a')
+	var dist_list = []
+	for i in raylist:
+		if i.is_colliding():
+			if i.get_collider().is_in_group("Wall"):
+				var dist = (i.get_collision_point() - global_position).length()
+				dist_list.append(dist)
+			else: dist_list.append(100)
+		else: dist_list.append(100)
+	
+	var min_dist = 100
+	var min_dir = -1
+	for i in range(len(dist_list)):
+		if dist_list[i] < min_dist:
+			min_dist = dist_list[i]
+			min_dir = i
+	
+	if min_dir >= 0:
+		for s in sprite_base_rotations:
+			var angle = raylist[min_dir].target_position.angle()
+			if is_real_head: angle += 1.5 * PI
+			else: angle += 0.5 * PI
+			$"GrabParticlesHandler".rotation =  angle
+				
+	grabparticles.emitting = true
 
 func _on_grab_finder_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Fruit") and is_real_head:

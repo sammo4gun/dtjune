@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c8arbucqopsgm"]
+[gd_scene load_steps=19 format=3 uid="uid://c8arbucqopsgm"]
 
 [ext_resource type="Script" uid="uid://c4ogtft3wpc3l" path="res://head.gd" id="1_xe7ry"]
 [ext_resource type="Texture2D" uid="uid://gdl7a77ebxlm" path="res://Assets/Caterpillar/caterpillar head talons closed.png" id="2_hukeq"]
@@ -44,6 +44,30 @@ scale_max = 4.0
 alpha_curve = SubResource("CurveTexture_kf857")
 anim_offset_max = 1.0
 
+[sub_resource type="Curve" id="Curve_hbaeg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.794118, 0.853933), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jmvna"]
+curve = SubResource("Curve_hbaeg")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iihrl"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 180.0
+direction = Vector3(0, -1, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 120.0
+initial_velocity_max = 200.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 200, 0)
+scale_min = 0.2
+scale_max = 1.5
+alpha_curve = SubResource("CurveTexture_jmvna")
+anim_offset_max = 1.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_mihp7"]
 radius = 2.53684
 
@@ -66,6 +90,32 @@ amount = 12
 texture = ExtResource("6_mkt57")
 lifetime = 1.2
 process_material = SubResource("ParticleProcessMaterial_hbaeg")
+
+[node name="GrabParticlesHandler" type="Node2D" parent="."]
+
+[node name="GrabParticlesHead" type="GPUParticles2D" parent="GrabParticlesHandler"]
+material = SubResource("CanvasItemMaterial_4kg8v")
+position = Vector2(-7.00006, 17)
+rotation = 0.484515
+emitting = false
+amount = 12
+texture = ExtResource("6_mkt57")
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_iihrl")
+
+[node name="GrabParticlesTail" type="GPUParticles2D" parent="GrabParticlesHandler"]
+material = SubResource("CanvasItemMaterial_4kg8v")
+position = Vector2(-8.99995, -14)
+rotation = 2.54889
+emitting = false
+amount = 12
+texture = ExtResource("6_mkt57")
+lifetime = 1.2
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_iihrl")
 
 [node name="GrabFinder" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)
