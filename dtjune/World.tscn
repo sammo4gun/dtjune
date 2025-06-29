@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=33 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -15,10 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
 [ext_resource type="Texture2D" uid="uid://csio4e3ee87l3" path="res://Assets/Background/4 - sky.png" id="11_c2gv2"]
 [ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
-[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
@@ -27,9 +26,9 @@
 [ext_resource type="PackedScene" uid="uid://svwhlc8q70wh" path="res://bramble.tscn" id="21_0to5b"]
 [ext_resource type="PackedScene" uid="uid://dsq5h4o0k7llb" path="res://Static Objects/branch_2.tscn" id="21_d7dfr"]
 [ext_resource type="Texture2D" uid="uid://clr1aqi8wc1aa" path="res://Assets/Objects/sign left.png" id="22_5j71u"]
-[ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
-[ext_resource type="PackedScene" uid="uid://cc5u8trdkwfim" path="res://cocoon.tscn" id="22_5j71u"]
 [ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
+[ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
+[ext_resource type="PackedScene" path="res://cocoon.tscn" id="28_rhl3w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
 texture = ExtResource("2_2dftf")
@@ -269,7 +268,6 @@ script = ExtResource("1_js7pq")
 [node name="Signs" type="Node2D" parent="."]
 position = Vector2(4802, 3229)
 rotation = 1.54034
-scale = Vector2(1, 1)
 
 [node name="Sign" type="Sprite2D" parent="Signs"]
 position = Vector2(1876.4, 639.436)
@@ -278,7 +276,7 @@ scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 
 [node name="Sign2" type="Sprite2D" parent="Signs"]
-position = Vector2(1025.15, 2309.29)
+position = Vector2(1038.36, 2302.69)
 rotation = -1.18541
 scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("3_jyqkj")
@@ -308,6 +306,24 @@ rotation = -1.79835
 scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 flip_h = true
+
+[node name="Sign7" type="Sprite2D" parent="Signs"]
+position = Vector2(-4346.25, 927.079)
+rotation = -2.98113
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("22_5j71u")
+
+[node name="Sign8" type="Sprite2D" parent="Signs"]
+position = Vector2(-3918.52, 1369.31)
+rotation = -0.998361
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("3_jyqkj")
+
+[node name="Sign9" type="Sprite2D" parent="Signs"]
+position = Vector2(-3420.72, 858.231)
+rotation = -1.81927
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("3_jyqkj")
 
 [node name="GroundFlowers" type="Node2D" parent="."]
 
@@ -417,8 +433,9 @@ picked_type = 64
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="Parallax2D"]
+scale = Vector2(0.5, 0.5)
 motion_scale = Vector2(0.1, 0.1)
-motion_offset = Vector2(0, 100)
+motion_offset = Vector2(0, -750)
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D/ParallaxLayer4"]
 position = Vector2(44, -132)
@@ -604,12 +621,10 @@ position = Vector2(3840, 66)
 [node name="Branch5" parent="." instance=ExtResource("13_b2ar6")]
 position = Vector2(3563, 41.9999)
 rotation = -0.318575
-scale = Vector2(1, 1)
 
 [node name="Branch8" parent="." instance=ExtResource("13_b2ar6")]
 position = Vector2(2723, -482)
 rotation = 0.530452
-scale = Vector2(1, 1)
 
 [node name="Branch4Left3" parent="." instance=ExtResource("7_fvag4")]
 position = Vector2(5014, 261)
@@ -621,6 +636,14 @@ rotation = 0.597831
 
 [node name="RightTrunk" type="Node2D" parent="."]
 position = Vector2(4527, 2097)
+
+[node name="TrunkLeft9" parent="RightTrunk" instance=ExtResource("11_f5c0m")]
+position = Vector2(1537, -4148)
+rotation = 0.398618
+
+[node name="TrunkLeft8" parent="RightTrunk" instance=ExtResource("11_f5c0m")]
+position = Vector2(1295, -3378)
+rotation = 0.398618
 
 [node name="TrunkLeft7" parent="RightTrunk" instance=ExtResource("11_f5c0m")]
 position = Vector2(910, -2590)
@@ -651,22 +674,18 @@ position = Vector2(4527, 2097)
 [node name="Trunk11" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-2016, -2865)
 rotation = -0.4829
-scale = Vector2(1, 1)
 
 [node name="Trunk10" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-1662, -2295)
 rotation = -0.4829
-scale = Vector2(1, 1)
 
 [node name="Trunk8" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-1540, -1470)
 rotation = 0.463851
-scale = Vector2(1, 1)
 
 [node name="Trunk9" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-1540, -1470)
 rotation = 0.463851
-scale = Vector2(1, 1)
 
 [node name="Trunk6" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-1834, -815)
@@ -701,64 +720,56 @@ rotation = -1.53985
 [node name="Bramble6" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(765.69, 850.715)
 rotation = 0.965814
-scale = Vector2(1, 1)
 
 [node name="Bramble10" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(2188.06, 646.606)
 rotation = 3.04385
-scale = Vector2(1, 1)
 
 [node name="Bramble11" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(-1857.63, -314.671)
 rotation = 3.17242
-scale = Vector2(1, 1)
 
 [node name="Bramble12" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(2071.66, 926.341)
 rotation = 4.31747
-scale = Vector2(1, 1)
 
 [node name="Bramble9" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(2246.8, 2705.77)
 rotation = -2.74447
-scale = Vector2(1, 1)
 
 [node name="Bramble8" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(1611.28, 2537.36)
 rotation = 2.98208
-scale = Vector2(1, 1)
 
 [node name="Bramble7" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(951.075, 827.968)
 rotation = 0.864435
-scale = Vector2(1, 1)
 
 [node name="Bramble5" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(651.603, 591.121)
 rotation = -2.06789
-scale = Vector2(1, 1)
 
 [node name="Bramble4" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(685.8, 500.019)
 rotation = -2.35993
-scale = Vector2(1, 1)
 
 [node name="Bramble" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(-852.332, 2555.6)
 rotation = 3.08019
-scale = Vector2(1, 1)
 
 [node name="Bramble2" parent="Brambles" instance=ExtResource("21_0to5b")]
 position = Vector2(213.974, 157.455)
 rotation = -2.89859
-scale = Vector2(1, 1)
 
 [node name="Bramble3" parent="Brambles" instance=ExtResource("21_0to5b")]
 rotation = 0.0
-scale = Vector2(1, 1)
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(4850, 13)
+position = Vector2(3229, -2785)
+
+[node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
+z_index = 1
+position = Vector2(3761, -846)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2219, 5205)
@@ -767,13 +778,11 @@ position = Vector2(2219, 5205)
 position = Vector2(4817, 3236)
 rotation = 1.54034
 
-[node name="Cocoon" parent="." instance=ExtResource("22_5j71u")]
-position = Vector2(3972, 3475)
-
 [node name="WhiteFade" type="ColorRect" parent="."]
+z_index = 1
 offset_left = -628.0
-offset_top = -780.0
-offset_right = 6824.0
+offset_top = -2839.0
+offset_right = 6932.0
 offset_bottom = 6249.0
 color = Color(1, 1, 1, 0)
 

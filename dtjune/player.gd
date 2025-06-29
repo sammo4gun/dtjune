@@ -14,12 +14,12 @@ const COLOUR_DICT = {
 	"base": Color8(133, 194, 21),
 	"white": Color8(155, 155, 155),
 	"red": Color8(206, 21, 0),
+	"green": Color8(1, 130, 32),
 	"yellow": Color8(209, 218, 0),
 	"blue": Color8(28, 219, 240),
 	"orange": Color8(221, 118, 4),
-	"violet": Color8(143, 0, 255),
+	"violet": Color8(247, 147, 177),
 	"purple": Color8(127, 0, 255),
-	"green": Color8(1, 130, 32),
 }
 
 var previous_link = null
@@ -49,17 +49,17 @@ func _ready():
 	init_links()
 	init_tail()
 	init_colours()
+		
+	var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+	max_head_thrust = get_total_mass() * gravity	
 	if RESPAWNED:
 		$TransitionRelief.play()
 		$Twinkle.play()
 		for i in link_array:
 			i.get_child(3).emitting = true
-			head.mood = "content"
-			await get_tree().create_timer(0.8).timeout
-			head.mood = "neutral"
-		
-	var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	max_head_thrust = get_total_mass() * gravity	
+		head.mood = "content"
+		await get_tree().create_timer(2.0).timeout
+		head.mood = "neutral"
 
 func init_colours():
 	head.set_colour(COLOUR_DICT['base'])
