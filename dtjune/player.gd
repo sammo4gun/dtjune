@@ -37,8 +37,8 @@ var target_rotation = {}
 
 var transitioning = false
 
-var NUM_LINKS = 8
-var COLOUR_LIST = ['white','white','white','white','white','white','white','white']
+var NUM_LINKS = 1
+var COLOUR_LIST = ['white']
 var RESPAWNED = false
 
 func _ready():
