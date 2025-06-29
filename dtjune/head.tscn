@@ -123,4 +123,6 @@ scale = Vector2(1.65765, 1.65765)
 texture = ExtResource("5_7nidb")
 flip_h = true
 
+[node name="AimDetectors" type="Node2D" parent="."]
+
 [connection signal="area_entered" from="GrabFinder" to="." method="_on_grab_finder_area_entered"]

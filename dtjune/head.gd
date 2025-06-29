@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 var stick_candidate = null
+var direction_candidate = null
 
 @onready var head_open_sprite = $"HeadOpenSprite"
 @onready var head_closed_sprite = $"HeadClosedSprite"
@@ -9,9 +10,35 @@ var stick_candidate = null
 @onready var tail_open_sprite = $"TailOpenSprite"
 @onready var tail_closed_sprite = $"TailClosedSprite"
 
+@onready var sprite_base_rotations = {
+	head_open_sprite: head_open_sprite.rotation,
+	head_closed_sprite: head_closed_sprite.rotation,
+	head_happy_sprite: head_happy_sprite.rotation,
+	head_shocked_sprite: head_shocked_sprite.rotation,
+	tail_open_sprite: tail_open_sprite.rotation,
+	tail_closed_sprite: tail_closed_sprite.rotation,
+}
+
+@onready var aimdetectors = $"AimDetectors"
+var raylist = []
+@export var num_rays = 16
+
 @export var is_real_head = false;
 
 var seeking = false
+var grabbing = false
+
+func _ready() -> void:
+	setup_rays(num_rays)
+
+func setup_rays(i):
+	for r in range(i):
+		var part = float(r)/float(i)
+		var ray = RayCast2D.new()
+		ray.target_position.x = sin(2*PI * part) * 30
+		ray.target_position.y = cos(2*PI * part) * 30
+		raylist.append(ray)
+		aimdetectors.add_child(ray)
 
 func _physics_process(_delta):
 	stick_candidate = null
@@ -21,7 +48,10 @@ func _physics_process(_delta):
 		for body in colliding_bodies:# Perform actions based on the colliding body, e.g.,
 			if body.is_in_group("Wall"):
 				stick_candidate = body;
+				direction_candidate = get_direction_to_grab()
 				break;
+	
+		var all_collision_points := []
 	
 	if not $EatingParticles.emitting:
 		if seeking:
@@ -38,6 +68,19 @@ func _physics_process(_delta):
 			else:
 				tail_open_sprite.visible = false
 				tail_closed_sprite.visible = true
+	
+	if grabbing:
+		pass
+
+func get_direction_to_grab():
+	var dist_list = []
+	for i in raylist:
+		if i.is_colliding():
+			if i.get_collider().is_in_group("Wall"):
+				var dist = (i.get_collision_point() - global_position).length()
+				dist_list.append(dist)
+			else: dist_list.append(100)
+		else: dist_list.append(100)
 
 func set_colour(color):
 	for sprite in [head_open_sprite, head_closed_sprite, head_happy_sprite, head_shocked_sprite, tail_open_sprite, tail_closed_sprite]:

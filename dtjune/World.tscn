@@ -1,6 +1,6 @@
 [gd_scene load_steps=24 format=4 uid="uid://bbq0b4ceveffm"]
 
-[ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
+[ext_resource type="Script" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
 [ext_resource type="PackedScene" uid="uid://xwr3l0s3uhd" path="res://player.tscn" id="3_bcbcq"]
 [ext_resource type="PackedScene" uid="uid://c20xcgusbs3hk" path="res://fruit.tscn" id="4_js7pq"]
@@ -12,10 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://cqhvat8hqqjyo" path="res://Assets/Background/2nd background.png" id="9_kva58"]
 [ext_resource type="Texture2D" uid="uid://dgphqu5xtt7ih" path="res://Assets/Background/1st background.png" id="10_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
+[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
@@ -293,7 +293,6 @@ flip_v = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundFlowers/Branch5"]
 position = Vector2(0, 2.5)
 rotation = 0.045768
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(-442, 88, -442, 86.3, -444, 85.2, -444, -66.7, -398, -73.7, -398, -75, -313.9, -75, -237, -65.8, -237, -64.9, -200, -63.9, -200, -63.1, -162, -65, -112.4, -65, -80, -71.6, -80, -72.9, -34, -75, -14.7, -75, 34, -61.5, 34, -60.8, 61, -57.8, 61, -57, 147.9, -57, 221.8, -75, 251.3, -75, 325.3, -52, 329.5, -52, 345, -44.2, 345, -43.4, 389.4, -28, 393.6, -28, 404.6, -21, 406.6, -21, 407.3, -17.8, 383, -7.60001, 383, -6, 370.4, -6, 360.4, -2, 351.1, -2, 269.2, 18, 262.3, 18, 228, 32.3, 228, 33.6, 195, 40.7, 195, 41.8, 108.1, 50, 72.3, 50, 17, 68.5, 17, 69.7, -9, 74.7, -9, 76, -170, 74, -236.6, 74, -308, 86.8, -308, 88)
 
 [node name="GroundBranch" type="Node2D" parent="."]
@@ -315,7 +314,6 @@ flip_v = true
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="GroundBranch/Branch4"]
 position = Vector2(0, 2.5)
 rotation = 0.045768
-scale = Vector2(1, 1)
 polygon = PackedVector2Array(-442, 88, -442, 86.3, -444, 85.2, -444, -66.7, -398, -73.7, -398, -75, -313.9, -75, -237, -65.8, -237, -64.9, -200, -63.9, -200, -63.1, -162, -65, -112.4, -65, -80, -71.6, -80, -72.9, -34, -75, -14.7, -75, 34, -61.5, 34, -60.8, 61, -57.8, 61, -57, 147.9, -57, 221.8, -75, 251.3, -75, 325.3, -52, 329.5, -52, 345, -44.2, 345, -43.4, 389.4, -28, 393.6, -28, 404.6, -21, 406.6, -21, 407.3, -17.8, 383, -7.60001, 383, -6, 370.4, -6, 360.4, -2, 351.1, -2, 269.2, 18, 262.3, 18, 228, 32.3, 228, 33.6, 195, 40.7, 195, 41.8, 108.1, 50, 72.3, 50, 17, 68.5, 17, 69.7, -9, 74.7, -9, 76, -170, 74, -236.6, 74, -308, 86.8, -308, 88)
 
 [node name="Branch1" parent="GroundBranch" instance=ExtResource("10_kva58")]
