@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=36 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -14,10 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://dgphqu5xtt7ih" path="res://Assets/Background/1st background.png" id="10_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
 [ext_resource type="Texture2D" uid="uid://csio4e3ee87l3" path="res://Assets/Background/4 - sky.png" id="11_c2gv2"]
-[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
+[ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="Texture2D" uid="uid://chnng1vjijdwy" path="res://Assets/Objects/mushroom.png" id="16_gtthi"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
@@ -28,8 +28,8 @@
 [ext_resource type="PackedScene" uid="uid://dsq5h4o0k7llb" path="res://Static Objects/branch_2.tscn" id="21_d7dfr"]
 [ext_resource type="Texture2D" uid="uid://clr1aqi8wc1aa" path="res://Assets/Objects/sign left.png" id="22_5j71u"]
 [ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
-[ext_resource type="PackedScene" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
-[ext_resource type="PackedScene" uid="uid://cc5u8trdkwfim" path="res://cocoon.tscn" id="28_rhl3w"]
+[ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
+[ext_resource type="PackedScene" uid="uid://eikpbeh754jf" path="res://cocoon.tscn" id="28_rhl3w"]
 [ext_resource type="Texture2D" uid="uid://53ag7yl7nved" path="res://Assets/UI/YouDidIt.png" id="29_bun23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
@@ -264,6 +264,9 @@ sources/0 = SubResource("TileSetAtlasSource_bcbcq")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cmany"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gtthi"]
+size = Vector2(5409, 20)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_js7pq")
 
@@ -319,12 +322,6 @@ texture = ExtResource("22_5j71u")
 position = Vector2(-2969.32, 129.639)
 rotation = -1.12149
 scale = Vector2(0.126, -0.126)
-texture = ExtResource("22_5j71u")
-
-[node name="Sign7" type="Sprite2D" parent="Signs"]
-position = Vector2(-4841.38, 1329.83)
-rotation = -2.98113
-scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 
 [node name="Sign8" type="Sprite2D" parent="Signs"]
@@ -814,11 +811,17 @@ rotation = -2.89859
 rotation = 0.0
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2101, 5273)
+position = Vector2(2157, 5338)
 
 [node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
 z_index = 1
 position = Vector2(3343.36, -1328.64)
+
+[node name="Sign7" type="Sprite2D" parent="Cocoon"]
+position = Vector2(-26.3601, -248.36)
+rotation = -1.44079
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("22_5j71u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2276, 5093)
@@ -943,6 +946,14 @@ offset_right = 8093.35
 offset_bottom = 3855.08
 rotation = 1.39894
 color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4239, -3618)
+shape = SubResource("RectangleShape2D_gtthi")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 
 [editable path="GroundFlowers/Flower2"]
 [editable path="GroundFlowers/Flower3"]

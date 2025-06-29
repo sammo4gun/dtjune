@@ -92,4 +92,10 @@ func grow_player(size, colours, new_colour):
 	
 	player.global_position = player_pos + Vector2(0, -35)
 	add_child(player)
- 
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	body.queue_free()
+	fade_background_to_white(0.15)
+	await get_tree().create_timer(7.5).timeout
+	get_tree().change_scene_to_file("res://menu.tscn")
