@@ -14,10 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://dgphqu5xtt7ih" path="res://Assets/Background/1st background.png" id="10_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
 [ext_resource type="Texture2D" uid="uid://csio4e3ee87l3" path="res://Assets/Background/4 - sky.png" id="11_c2gv2"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
+[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
@@ -27,8 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://dsq5h4o0k7llb" path="res://Static Objects/branch_2.tscn" id="21_d7dfr"]
 [ext_resource type="Texture2D" uid="uid://clr1aqi8wc1aa" path="res://Assets/Objects/sign left.png" id="22_5j71u"]
 [ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
-[ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
-[ext_resource type="PackedScene" path="res://cocoon.tscn" id="28_rhl3w"]
+[ext_resource type="PackedScene" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
+[ext_resource type="PackedScene" uid="uid://cc5u8trdkwfim" path="res://cocoon.tscn" id="28_rhl3w"]
 [ext_resource type="Texture2D" uid="uid://53ag7yl7nved" path="res://Assets/UI/YouDidIt.png" id="29_bun23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
@@ -689,7 +689,6 @@ rotation = 0.0239946
 [node name="Trunk13" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-2487, -4278)
 rotation = -0.147007
-scale = Vector2(1, 1)
 
 [node name="Trunk12" parent="LeftTrunk" instance=ExtResource("14_gn8l5")]
 position = Vector2(-2328, -3550)
@@ -789,7 +788,7 @@ rotation = -2.89859
 rotation = 0.0
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2120, 5224)
+position = Vector2(3752, -1226)
 
 [node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
 z_index = 1
@@ -818,6 +817,106 @@ color = Color(1, 1, 1, 0)
 
 [node name="TransitionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_jyqkj")
+volume_db = -5.0
+
+[node name="Brown" type="ColorRect" parent="."]
+offset_left = -2126.0
+offset_right = 1592.0
+offset_bottom = 5407.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -3371.0
+offset_right = 3790.0
+offset_bottom = 2036.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown"]
+layout_mode = 0
+offset_left = 8765.0
+offset_top = 86.0
+offset_right = 12483.0
+offset_bottom = 5493.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = -1693.0
+offset_top = 6690.0
+offset_right = 1968.0
+offset_bottom = 8693.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 37.0
+offset_top = -1000.0
+offset_right = 3698.0
+offset_bottom = 6.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = -986.0
+offset_right = 3692.0
+offset_bottom = 20.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = -818.0
+offset_right = 3687.0
+offset_bottom = 188.0
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 1668.0
+offset_top = -3517.0
+offset_right = 5329.0
+offset_bottom = 506.0
+rotation = 0.431302
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = -5012.42
+offset_top = 2271.48
+offset_right = -1351.42
+offset_bottom = 6294.48
+rotation = 0.685315
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = -45.9137
+offset_top = -361.825
+offset_right = 3615.09
+offset_bottom = 3661.17
+rotation = 0.23214
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 3685.36
+offset_top = -358.207
+offset_right = 7346.36
+offset_bottom = 3664.79
+rotation = 0.541364
+color = Color(0.560784, 0.337255, 0.231373, 1)
+
+[node name="Brown" type="ColorRect" parent="Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown/Brown"]
+layout_mode = 0
+offset_left = 4432.35
+offset_top = -167.919
+offset_right = 8093.35
+offset_bottom = 3855.08
+rotation = 1.39894
+color = Color(0.560784, 0.337255, 0.231373, 1)
 
 [editable path="GroundFlowers/Flower2"]
 [editable path="GroundFlowers/Flower3"]
