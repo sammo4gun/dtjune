@@ -135,7 +135,15 @@ func _physics_process(delta):
 	
 	get_active_head()
 	if active_head:
-		active_head.apply_force(current_force)
+		if active_head.bramble_colliding:
+			#var force_strength = velocity.length()  # Or a custom bounce factor
+			
+			var rebound_force = active_head.bramble_collision_normal * 20000
+			var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
+			print(reflected_force)
+			active_head.apply_force(rebound_force) 
+		else:
+			active_head.apply_force(current_force)
 	handle_head_sprites()
 
 func handle_head_sprites():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=25 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -12,14 +12,15 @@
 [ext_resource type="Texture2D" uid="uid://cqhvat8hqqjyo" path="res://Assets/Background/2nd background.png" id="9_kva58"]
 [ext_resource type="Texture2D" uid="uid://dgphqu5xtt7ih" path="res://Assets/Background/1st background.png" id="10_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
+[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://cl5pyckcfn0u1" path="res://Static Objects/flower.tscn" id="19_cvq6i"]
+[ext_resource type="PackedScene" uid="uid://svwhlc8q70wh" path="res://bramble.tscn" id="21_0to5b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
 texture = ExtResource("2_2dftf")
@@ -347,7 +348,7 @@ position = Vector2(3715, 2468)
 picked_type = 16
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2194, 5340)
+position = Vector2(4325, 3704)
 
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 
@@ -476,6 +477,10 @@ position = Vector2(3996, 1358)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2219, 5205)
+
+[node name="Bramble" parent="." instance=ExtResource("21_0to5b")]
+position = Vector2(4817, 3236)
+rotation = 1.54034
 
 [editable path="GroundFlowers/Flower2"]
 [editable path="GroundFlowers/Flower3"]
