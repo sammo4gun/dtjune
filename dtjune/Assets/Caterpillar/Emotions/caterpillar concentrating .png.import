@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2f8cimqkddet"
-path="res://.godot/imported/caterpillar shocked .png-a6af2d002eb4b9625a164aed894149af.ctex"
+uid="uid://cs1tuwufwdxcb"
+path="res://.godot/imported/caterpillar concentrating .png-4325de380329dceb5c7d3ba3467b85b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Caterpillar/caterpillar shocked .png"
-dest_files=["res://.godot/imported/caterpillar shocked .png-a6af2d002eb4b9625a164aed894149af.ctex"]
+source_file="res://Assets/Caterpillar/Emotions/caterpillar concentrating .png"
+dest_files=["res://.godot/imported/caterpillar concentrating .png-4325de380329dceb5c7d3ba3467b85b0.ctex"]
 
 [params]
 

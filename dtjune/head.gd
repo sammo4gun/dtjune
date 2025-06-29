@@ -3,21 +3,28 @@ extends RigidBody2D
 var stick_candidate = null
 var direction_candidate = null
 
-@onready var head_open_sprite = $"HeadOpenSprite"
-@onready var head_closed_sprite = $"HeadClosedSprite"
-@onready var head_happy_sprite = $"HeadHappySprite"
-@onready var head_shocked_sprite = $"HeadShockedSprite"
-@onready var tail_open_sprite = $"TailOpenSprite"
-@onready var tail_closed_sprite = $"TailClosedSprite"
+var grabparticles = preload("res://grab_particles.tscn")
 
-@onready var sprite_base_rotations = {
-	head_open_sprite: head_open_sprite.rotation,
-	head_closed_sprite: head_closed_sprite.rotation,
-	head_happy_sprite: head_happy_sprite.rotation,
-	head_shocked_sprite: head_shocked_sprite.rotation,
-	tail_open_sprite: tail_open_sprite.rotation,
-	tail_closed_sprite: tail_closed_sprite.rotation,
-}
+@onready var head_neutral_open_sprite = $"SpriteHandler/HeadOpenSprite"
+@onready var head_neutral_closed_sprite = $"SpriteHandler/HeadClosedSprite"
+@onready var head_eating_open_sprite = $"SpriteHandler/HeadEatingOpenSprite"
+@onready var head_eating_closed_sprite = $"SpriteHandler/HeadEatingClosedSprite"
+@onready var head_content_open_sprite = $"SpriteHandler/HeadContentOpenSprite"
+@onready var head_content_closed_sprite = $"SpriteHandler/HeadContentClosedSprite"
+@onready var head_shocked_open_sprite = $"SpriteHandler/HeadShockedSprite"
+@onready var head_shocked_closed_sprite = $"SpriteHandler/HeadShockedSprite"
+@onready var head_effort_open_sprite = $"SpriteHandler/HeadEffortOpenSprite"
+@onready var head_effort_closed_sprite = $"SpriteHandler/HeadEffortClosedSprite"
+
+@onready var sprite_list = $"SpriteHandler".get_children()
+
+var head_open_sprite
+var head_closed_sprite
+
+@onready var tail_open_sprite = $"SpriteHandler/TailOpenSprite"
+@onready var tail_closed_sprite = $"SpriteHandler/TailClosedSprite"
+
+@onready var spriterotation = $"SpriteHandler"
 
 @onready var aimdetectors = $"AimDetectors"
 var raylist = []
@@ -28,18 +35,18 @@ var raylist = []
 var seeking = false
 var grabbing = false
 var prev_grabbing = false
-var grabparticles
 var bramble_colliding = false
 var bramble_collision_normal = null
 var slapped = false
 var in_cocoon = false
 
+var mood = "neutral"
+var time = 0
+var flip_eating_time
+var mouthopen = null
+
 func _ready() -> void:
 	setup_rays(num_rays)
-	if is_real_head:
-		grabparticles = $"GrabParticlesHandler/GrabParticlesHead"
-	else: 
-		grabparticles = $"GrabParticlesHandler/GrabParticlesTail"
 
 func setup_rays(i):
 	for r in range(i):
@@ -50,7 +57,9 @@ func setup_rays(i):
 		raylist.append(ray)
 		aimdetectors.add_child(ray)
 
-func _physics_process(_delta):
+func _physics_process(delta):
+	time += delta
+	if is_real_head: get_mood_sprite()
 	stick_candidate = null
 	bramble_colliding = false
 	in_cocoon = false
@@ -86,31 +95,71 @@ func _physics_process(_delta):
 	if(!walls_colliding):
 		slapped = false
 
-	
 	if not $EatingParticles.emitting:
+		mouthopen = null
 		if seeking:
 			if is_real_head:
-				head_open_sprite.visible = true
-				head_closed_sprite.visible = false
+				for sp in sprite_list:
+					if sp == head_open_sprite:
+						sp.visible = true
+					else: sp.visible = false
 			else:
-				tail_open_sprite.visible = true
-				tail_closed_sprite.visible = false
-		else:
+				for sp in sprite_list:
+					if sp == tail_open_sprite:
+						sp.visible = true
+					else: sp.visible = false
+		if not seeking:
 			if is_real_head:
-				head_open_sprite.visible = false
-				head_closed_sprite.visible = true
+				for sp in sprite_list:
+					if sp == head_closed_sprite:
+						sp.visible = true
+					else: sp.visible = false
 			else:
-				tail_open_sprite.visible = false
-				tail_closed_sprite.visible = true
+				for sp in sprite_list:
+					if sp == tail_closed_sprite:
+						sp.visible = true
+					else: sp.visible = false
+	else:
+		if mouthopen == null:
+			mouthopen = true
+			flip_eating_time = time
+		if time - flip_eating_time > 0.2:
+			mouthopen = !mouthopen
+			flip_eating_time = time
+		if mouthopen:
+			for sp in sprite_list:
+				if sp == head_eating_open_sprite:
+					sp.visible = true
+				else: sp.visible = false
+		else:
+			for sp in sprite_list:
+				if sp == head_eating_closed_sprite:
+					sp.visible = true
+				else: sp.visible = false
 	
 	if grabbing:
 		if grabbing != prev_grabbing:
 			grab()
 		handle_sprite_grabs()
 	else:
-		for s in sprite_base_rotations:
-			s.rotation = lerp_angle(s.rotation, sprite_base_rotations[s], 0.3)
+		if grabbing != prev_grabbing:
+			release()
+		spriterotation.rotation = lerp_angle(spriterotation.rotation, 0, 0.3)
 	prev_grabbing = grabbing
+
+func get_mood_sprite():
+	if mood == "neutral":
+		head_open_sprite = head_neutral_open_sprite
+		head_closed_sprite = head_neutral_closed_sprite
+	if mood == "shocked":
+		head_open_sprite = head_shocked_open_sprite
+		head_closed_sprite = head_shocked_closed_sprite
+	if mood == "effort":
+		head_open_sprite = head_effort_open_sprite
+		head_closed_sprite = head_effort_closed_sprite
+	if mood == "content":
+		head_open_sprite = head_content_open_sprite
+		head_closed_sprite = head_content_closed_sprite
 
 func handle_bramble():
 	bramble_colliding = false
@@ -142,33 +191,34 @@ func handle_sprite_grabs():
 			min_dir = i
 	
 	if min_dir >= 0:
-		for s in sprite_base_rotations:
-			var angle = raylist[min_dir].target_position.angle()
-			if is_real_head: angle += 1.5 * PI
-			else: angle += 0.5 * PI
-			s.rotation = lerp_angle(s.rotation, sprite_base_rotations[s] + angle, 0.1)
+		var angle = raylist[min_dir].target_position.angle()
+		if is_real_head: angle += 1.5 * PI
+		else: angle += 0.5 * PI
+		spriterotation.rotation = lerp_angle(spriterotation.rotation, angle, 0.3)
 
 func set_colour(color):
-	for sprite in [head_open_sprite, head_closed_sprite, head_happy_sprite, head_shocked_sprite, tail_open_sprite, tail_closed_sprite]:
+	for sprite in sprite_list:
 		sprite.self_modulate = color
 
 func start_eating(color):
 	if is_real_head:
 		$Eating.play()
-		head_open_sprite.visible = false
-		head_closed_sprite.visible = false
 		$EatingParticles.modulate = color
 		$EatingParticles.emitting = true
-		head_happy_sprite.visible = true
 
 func stop_eating():
 	if is_real_head:
-		head_happy_sprite.visible = false
-		head_shocked_sprite.visible = true
+		mood = "shocked"
 		$EatingParticles.emitting = false
 
 func grab():
-	print('a')
+	if is_real_head:
+		if mood != 'content':
+			mood = 'effort'
+	
+	var grab_part = grabparticles.instantiate()
+	grab_part.position = Vector2(12, 0)
+	grab_part.rotation = deg_to_rad(27.8)
 	var dist_list = []
 	for i in raylist:
 		if i.is_colliding():
@@ -186,13 +236,16 @@ func grab():
 			min_dir = i
 	
 	if min_dir >= 0:
-		for s in sprite_base_rotations:
-			var angle = raylist[min_dir].target_position.angle()
-			if is_real_head: angle += 1.5 * PI
-			else: angle += 0.5 * PI
-			$"GrabParticlesHandler".rotation =  angle
-				
-	grabparticles.emitting = true
+		var angle = raylist[min_dir].target_position.angle()
+		$"GrabParticlesHandler".rotation =  angle
+		$"GrabParticlesHandler".add_child(grab_part)
+		grab_part.emitting = true
+		await get_tree().create_timer(0.8).timeout
+		grab_part.queue_free()
+
+func release():
+	if is_real_head:
+		mood = "neutral"
 
 func _on_grab_finder_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Fruit") and is_real_head:

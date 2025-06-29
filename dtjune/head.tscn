@@ -1,16 +1,22 @@
-[gd_scene load_steps=22 format=3 uid="uid://c8arbucqopsgm"]
+[gd_scene load_steps=25 format=3 uid="uid://c8arbucqopsgm"]
 
 [ext_resource type="Script" uid="uid://c4ogtft3wpc3l" path="res://head.gd" id="1_xe7ry"]
-[ext_resource type="Texture2D" uid="uid://gdl7a77ebxlm" path="res://Assets/Caterpillar/caterpillar head talons closed.png" id="2_hukeq"]
-[ext_resource type="Texture2D" uid="uid://da72yplofo7uk" path="res://Assets/Caterpillar/caterpillar head talons open.png" id="2_pij62"]
+[ext_resource type="PackedScene" uid="uid://x7265w68qvjj" path="res://grab_particles.tscn" id="3_hbaeg"]
 [ext_resource type="Texture2D" uid="uid://eshohnsbqkny" path="res://Assets/Caterpillar/caterpillar bum talons open.png" id="4_akhm5"]
+[ext_resource type="Texture2D" uid="uid://bnabjsqa47v7k" path="res://Assets/Caterpillar/Emotions/caterpillar concentrating open .png" id="4_iihrl"]
 [ext_resource type="Texture2D" uid="uid://bwnyo4ybvdueq" path="res://Assets/Caterpillar/caterpillar bum talons closed.png" id="5_7nidb"]
-[ext_resource type="Texture2D" uid="uid://b2f8cimqkddet" path="res://Assets/Caterpillar/caterpillar shocked .png" id="5_rwjvo"]
-[ext_resource type="Texture2D" uid="uid://rcreaiilx3tx" path="res://Assets/Caterpillar/caterpillar happy.png" id="6_hbaeg"]
+[ext_resource type="Texture2D" uid="uid://cs1tuwufwdxcb" path="res://Assets/Caterpillar/Emotions/caterpillar concentrating .png" id="5_eg15x"]
+[ext_resource type="Texture2D" uid="uid://b2f8cimqkddet" path="res://Assets/Caterpillar/Emotions/caterpillar shocked .png" id="5_rwjvo"]
 [ext_resource type="Texture2D" uid="uid://drgiqdq143f71" path="res://Assets/FoodMorsels.png" id="6_mkt57"]
+[ext_resource type="Texture2D" uid="uid://c7cnu1vbrbfjt" path="res://Assets/Caterpillar/Emotions/caterpillar effort open.png" id="7_iihrl"]
+[ext_resource type="Texture2D" uid="uid://bmwnb3yyk6aos" path="res://Assets/Caterpillar/Emotions/caterpillar effort .png" id="8_eg15x"]
+[ext_resource type="Texture2D" uid="uid://dxopmwh4xaxq6" path="res://Assets/Caterpillar/Emotions/caterpillar content open .png" id="9_85nsl"]
 [ext_resource type="AudioStream" uid="uid://btfehxm6kix87" path="res://Audio/eating.mp3" id="9_hbaeg"]
+[ext_resource type="Texture2D" uid="uid://crk4g3sexfqol" path="res://Assets/Caterpillar/Emotions/caterpillar content.png" id="10_at4hp"]
 [ext_resource type="AudioStream" uid="uid://coudkv2alhobe" path="res://Audio/pain.mp3" id="10_iihrl"]
 [ext_resource type="AudioStream" uid="uid://bxa65r7utckc" path="res://Audio/slap.mp3" id="10_jmvna"]
+[ext_resource type="Texture2D" uid="uid://cb552cx72a3ji" path="res://Assets/Caterpillar/Emotions/caterpillar eating.png" id="11_at4hp"]
+[ext_resource type="Texture2D" uid="uid://3p2g7a0kocyx" path="res://Assets/Caterpillar/Emotions/caterpillar eating closed.png" id="12_80bv5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwjvo"]
 friction = 0.25
@@ -47,30 +53,6 @@ scale_max = 4.0
 alpha_curve = SubResource("CurveTexture_kf857")
 anim_offset_max = 1.0
 
-[sub_resource type="Curve" id="Curve_hbaeg"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.794118, 0.853933), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_jmvna"]
-curve = SubResource("Curve_hbaeg")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_iihrl"]
-particle_flag_disable_z = true
-angle_min = 1.07288e-05
-angle_max = 180.0
-direction = Vector3(0, -1, 0)
-spread = 180.0
-flatness = 1.0
-initial_velocity_min = 120.0
-initial_velocity_max = 200.0
-angular_velocity_min = -90.0
-angular_velocity_max = 90.0
-gravity = Vector3(0, 200, 0)
-scale_min = 0.2
-scale_max = 1.5
-alpha_curve = SubResource("CurveTexture_jmvna")
-anim_offset_max = 1.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_mihp7"]
 radius = 2.53684
 
@@ -96,29 +78,9 @@ process_material = SubResource("ParticleProcessMaterial_hbaeg")
 
 [node name="GrabParticlesHandler" type="Node2D" parent="."]
 
-[node name="GrabParticlesHead" type="GPUParticles2D" parent="GrabParticlesHandler"]
-material = SubResource("CanvasItemMaterial_4kg8v")
-position = Vector2(-7.00006, 17)
-rotation = 0.484515
-emitting = false
-amount = 12
-texture = ExtResource("6_mkt57")
-lifetime = 1.2
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_iihrl")
-
-[node name="GrabParticlesTail" type="GPUParticles2D" parent="GrabParticlesHandler"]
-material = SubResource("CanvasItemMaterial_4kg8v")
-position = Vector2(-8.99995, -14)
-rotation = 2.54889
-emitting = false
-amount = 12
-texture = ExtResource("6_mkt57")
-lifetime = 1.2
-one_shot = true
-explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_iihrl")
+[node name="GrabParticles" parent="GrabParticlesHandler" instance=ExtResource("3_hbaeg")]
+position = Vector2(12, 0)
+rotation = 1.58305
 
 [node name="GrabFinder" type="Area2D" parent="."]
 scale = Vector2(1.5, 1.5)
@@ -128,23 +90,25 @@ position = Vector2(-1.90735e-06, 0)
 scale = Vector2(5, 5)
 shape = SubResource("CircleShape2D_mihp7")
 
-[node name="HeadOpenSprite" type="Sprite2D" parent="."]
+[node name="SpriteHandler" type="Node2D" parent="."]
+
+[node name="HeadOpenSprite" type="Sprite2D" parent="SpriteHandler"]
 visible = false
 position = Vector2(0.824044, 8.25153)
 rotation = 1.5708
 scale = Vector2(1.70322, 1.70322)
-texture = ExtResource("2_pij62")
+texture = ExtResource("4_iihrl")
 flip_h = true
 
-[node name="HeadClosedSprite" type="Sprite2D" parent="."]
+[node name="HeadClosedSprite" type="Sprite2D" parent="SpriteHandler"]
 visible = false
 position = Vector2(2.82404, 8.25153)
 rotation = 1.5708
 scale = Vector2(1.70322, 1.70322)
-texture = ExtResource("2_hukeq")
+texture = ExtResource("5_eg15x")
 flip_h = true
 
-[node name="HeadShockedSprite" type="Sprite2D" parent="."]
+[node name="HeadShockedSprite" type="Sprite2D" parent="SpriteHandler"]
 visible = false
 position = Vector2(2.82404, 8.25153)
 rotation = 1.5708
@@ -152,15 +116,55 @@ scale = Vector2(1.70322, 1.70322)
 texture = ExtResource("5_rwjvo")
 flip_h = true
 
-[node name="HeadHappySprite" type="Sprite2D" parent="."]
+[node name="HeadEffortOpenSprite" type="Sprite2D" parent="SpriteHandler"]
+visible = false
+position = Vector2(2.82404, 8.25153)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("7_iihrl")
+flip_h = true
+
+[node name="HeadEffortClosedSprite" type="Sprite2D" parent="SpriteHandler"]
+visible = false
+position = Vector2(2.82404, 8.25153)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("8_eg15x")
+flip_h = true
+
+[node name="HeadContentOpenSprite" type="Sprite2D" parent="SpriteHandler"]
+visible = false
+position = Vector2(2.82404, 8.25153)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("9_85nsl")
+flip_h = true
+
+[node name="HeadContentClosedSprite" type="Sprite2D" parent="SpriteHandler"]
+visible = false
+position = Vector2(2.82404, 8.25153)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("10_at4hp")
+flip_h = true
+
+[node name="HeadEatingOpenSprite" type="Sprite2D" parent="SpriteHandler"]
 visible = false
 position = Vector2(0.99997, 8.42743)
 rotation = 1.5708
 scale = Vector2(1.70322, 1.70322)
-texture = ExtResource("6_hbaeg")
+texture = ExtResource("11_at4hp")
 flip_h = true
 
-[node name="TailOpenSprite" type="Sprite2D" parent="."]
+[node name="HeadEatingClosedSprite" type="Sprite2D" parent="SpriteHandler"]
+visible = false
+position = Vector2(2.99997, 8.42744)
+rotation = 1.5708
+scale = Vector2(1.70322, 1.70322)
+texture = ExtResource("12_80bv5")
+flip_h = true
+
+[node name="TailOpenSprite" type="Sprite2D" parent="SpriteHandler"]
 visible = false
 position = Vector2(-0.47018, -3.47024)
 rotation = 1.5708
@@ -168,7 +172,7 @@ scale = Vector2(1.65811, 1.65811)
 texture = ExtResource("4_akhm5")
 flip_h = true
 
-[node name="TailClosedSprite" type="Sprite2D" parent="."]
+[node name="TailClosedSprite" type="Sprite2D" parent="SpriteHandler"]
 visible = false
 position = Vector2(-0.47018, -3.47024)
 rotation = 1.5708

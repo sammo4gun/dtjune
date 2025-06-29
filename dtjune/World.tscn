@@ -12,10 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://cqhvat8hqqjyo" path="res://Assets/Background/2nd background.png" id="9_kva58"]
 [ext_resource type="Texture2D" uid="uid://dgphqu5xtt7ih" path="res://Assets/Background/1st background.png" id="10_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://uxgbrq57g55w" path="res://Static Objects/branch_1_left.tscn" id="10_kva58"]
-[ext_resource type="PackedScene" uid="uid://b8nte6xf83kt7" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
+[ext_resource type="PackedScene" path="res://Static Objects/trunk_left.tscn" id="11_f5c0m"]
 [ext_resource type="PackedScene" uid="uid://d14inyuq76brr" path="res://Static Objects/vine.tscn" id="11_kva58"]
 [ext_resource type="PackedScene" uid="uid://d1ob6o5getsqg" path="res://Static Objects/branch_4.tscn" id="13_b2ar6"]
-[ext_resource type="PackedScene" uid="uid://b4dism4tg56di" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
+[ext_resource type="PackedScene" path="res://Static Objects/trunk.tscn" id="14_gn8l5"]
 [ext_resource type="PackedScene" uid="uid://bhtjxaqcafu5f" path="res://Static Objects/branch_5.tscn" id="16_1fphk"]
 [ext_resource type="PackedScene" uid="uid://dk8adh22htyau" path="res://Static Objects/branch_3_left.tscn" id="17_sjtuv"]
 [ext_resource type="PackedScene" uid="uid://dgamj54b8xyka" path="res://Static Objects/branch_5_left.tscn" id="18_sjtuv"]
@@ -349,9 +349,6 @@ picked_type = 8
 position = Vector2(3715, 2468)
 picked_type = 16
 
-[node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(4575, 3710)
-
 [node name="Parallax2D" type="ParallaxBackground" parent="."]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="Parallax2D"]
@@ -418,7 +415,7 @@ scale = Vector2(1.11111, 1.11111)
 polygon = PackedVector2Array(-450, -28, -345, -29, -258, -61, -107, -62, -65, -56, -68, -50, -109, -45, -149, -30, -235, -25, -274, -3, -238, -3, -219, -10, -182, -10, -103, -7, -94, 1, -57, -1, -35, -2, -15, -2, 2, -5, 43, -7, 60, -8, 90, -6, 133, -21, 175, -20, 213, -13, 232, -4, 321, -3, 335, 7, 332, 12, 286, 28, 188, 25, 140, 43, 89, 53, 152, 61, 273, 70, 322, 82, 369, 83, 396, 98, 397, 108, 316, 110, 4, 110, -74, 101, -244, 103, -405, 107, -450, 111)
 
 [node name="Vine" parent="." instance=ExtResource("11_kva58")]
-position = Vector2(3012, 3139)
+position = Vector2(3012, 3162)
 
 [node name="Branch5" parent="." instance=ExtResource("13_b2ar6")]
 position = Vector2(3614, 5032)
@@ -496,6 +493,8 @@ color = Color(1, 1, 1, 0)
 
 [node name="TransitionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_jyqkj")
+[node name="Player" parent="." instance=ExtResource("3_bcbcq")]
+position = Vector2(2992, 3712)
 
 [editable path="GroundFlowers/Flower2"]
 [editable path="GroundFlowers/Flower3"]

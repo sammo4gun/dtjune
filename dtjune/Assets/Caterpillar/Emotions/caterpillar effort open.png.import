@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rcreaiilx3tx"
-path="res://.godot/imported/caterpillar happy.png-396a9d2766ba214a88cbb0489adf9a80.ctex"
+uid="uid://c7cnu1vbrbfjt"
+path="res://.godot/imported/caterpillar effort open.png-0e0bae43d7fa12151580d2baf3782030.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Caterpillar/caterpillar happy.png"
-dest_files=["res://.godot/imported/caterpillar happy.png-396a9d2766ba214a88cbb0489adf9a80.ctex"]
+source_file="res://Assets/Caterpillar/Emotions/caterpillar effort open.png"
+dest_files=["res://.godot/imported/caterpillar effort open.png-0e0bae43d7fa12151580d2baf3782030.ctex"]
 
 [params]
 

@@ -26,6 +26,7 @@ var head = null
 var head_joint = null
 var tail = null
 var tail_joint = null
+var eating = false
 
 var current_force = Vector2.ZERO
 
@@ -50,6 +51,9 @@ func _ready():
 		$Twinkle.play()
 		for i in link_array:
 			i.get_child(3).emitting = true
+			head.mood = "content"
+			await get_tree().create_timer(0.8).timeout
+			head.mood = "neutral"
 		
 	var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 	max_head_thrust = get_total_mass() * gravity	
@@ -124,25 +128,25 @@ func _physics_process(delta):
 		input_direction.y += 1
 	if Input.is_action_pressed("ui_up"):
 		input_direction.y -= 1
-
 	if input_direction != Vector2.ZERO:
 		var target_force = input_direction.normalized() * current_head_thrust
 		var acceleration_speed = 3.0
 		current_force = current_force.lerp(target_force, delta * acceleration_speed)
 	else:
 		current_force = Vector2.ZERO
-	if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
-		attach_joint_to_candidate(head, "head_joint")
 
-	if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
-		attach_joint_to_candidate(tail, "tail_joint")
+	if not eating:
+		if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
+			attach_joint_to_candidate(head, "head_joint")
+
+		if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
+			attach_joint_to_candidate(tail, "tail_joint")
 	
 	get_active_head()
 	if active_head:
 		if active_head.bramble_colliding:
 			var rebound_force = active_head.bramble_collision_normal * 20000
 			var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
-			print(reflected_force)
 			active_head.apply_force(rebound_force) 
 		else:
 			active_head.apply_force(current_force)
@@ -227,6 +231,7 @@ func detach_joint(joint_name: String):
 
 func eat_fruit(fruit):
 	var li = fruit.get_eaten()
+	eating = true
 	head.start_eating(li[1])
 	await get_tree().create_timer(2.5).timeout
 	head.stop_eating()
