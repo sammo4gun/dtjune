@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c14qryxp262iw"]
+
+[ext_resource type="Texture2D" uid="uid://dmc0mfp6p2pwt" path="res://Assets/buttery wings closed.png" id="1_4fxnp"]
+[ext_resource type="Texture2D" uid="uid://dmq6mpuvc8stq" path="res://Assets/butterfly body final.png" id="2_pc22k"]
+[ext_resource type="AudioStream" uid="uid://yggqv4q2ntuv" path="res://Audio/butterflyswoosh.mp3" id="3_pc22k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+height = 60.0
+
+[node name="ButterflyBody" type="RigidBody2D"]
+
+[node name="Wings" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_4fxnp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_pc22k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+scale = Vector2(2.5, 2.5)
+shape = SubResource("CapsuleShape2D_sweqy")
+
+[node name="swoosh" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_pc22k")
+volume_db = -3.0

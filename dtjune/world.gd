@@ -59,6 +59,14 @@ func fade_background_to_clear(speed):
 	fade_alpha = 1.0
 	fading_out = true
 
+func grow_butterfy():
+	var player_pos = player.head.global_position
+	player.queue_free()
+	player = player_scene.instantiate()
+	player.butterfly_mode = true
+	player.global_position = player_pos + Vector2(0, -35)
+	add_child(player)
+ 
 func grow_player(size, colours, new_colour):
 	var player_pos = player.head.global_position
 	var player_upside_down = player.head.global_rotation > 0

@@ -28,6 +28,8 @@ var tail = null
 var tail_joint = null
 var eating = false
 
+var butterfly_mode = false
+
 var current_force = Vector2.ZERO
 
 var max_head_thrust = 0
@@ -36,27 +38,50 @@ var current_head_thrust = 0
 var target_rotation = {}
 
 var transitioning = false
+var body_rotation = 0
 
 var NUM_LINKS = 1
 var COLOUR_LIST = ['white']
 var RESPAWNED = false
 
+var can_flap = true
+var butterfly_instance = null
+var ButterflyBodyScene = preload("res://butterfly_body.tscn")
+
 func _ready():
-	init_head()
-	init_links()
-	init_tail()
-	init_colours()
-	if RESPAWNED:
-		$TransitionRelief.play()
-		$Twinkle.play()
-		for i in link_array:
-			i.get_child(3).emitting = true
-			head.mood = "content"
-			await get_tree().create_timer(0.8).timeout
-			head.mood = "neutral"
+	if(butterfly_mode):
+		spawn_butterfly()
+		butterfly_instance.collision_layer = 1
+		butterfly_instance.visible = true
+		butterfly_instance.mass = 0.6
+		butterfly_instance.linear_damp = 2
 		
-	var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-	max_head_thrust = get_total_mass() * gravity	
+		butterfly_instance.get_node("Wings").texture = load("res://Assets/buttery wings open.png")
+		butterfly_instance.linear_velocity.y = $ButterflyBody.linear_velocity.y/2
+		await get_tree().create_timer(0.2).timeout
+		butterfly_instance.get_node("Wings").texture  = load("res://Assets/buttery wings closed.png")
+		butterfly_instance.get_node("swoosh").play()
+		butterfly_instance.apply_force(Vector2(0,-70000))
+	else:
+		init_head()
+		init_links()
+		init_tail()
+		init_colours()
+		if RESPAWNED:
+			$TransitionRelief.play()
+			$Twinkle.play()
+			for i in link_array:
+				i.get_child(3).emitting = true
+				head.mood = "content"
+				await get_tree().create_timer(0.8).timeout
+				head.mood = "neutral"
+			
+		var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+		max_head_thrust = get_total_mass() * gravity	
+
+func spawn_butterfly():
+	butterfly_instance = ButterflyBodyScene.instantiate()
+	add_child(butterfly_instance)
 
 func init_colours():
 	head.set_colour(COLOUR_DICT['base'])
@@ -114,12 +139,13 @@ func init_links():
 		previous_link = link
 
 func get_camera_pos():
-	return (head.global_position+tail.global_position) / 2
+	if butterfly_mode:
+		return butterfly_instance.global_position;
+	else:	
+		return (head.global_position+tail.global_position) / 2
 
 func _physics_process(delta):
-	handle_rotation()
 	var input_direction = Vector2.ZERO
-
 	if Input.is_action_pressed("ui_right"):
 		input_direction.x += 1
 	if Input.is_action_pressed("ui_left"):
@@ -128,38 +154,81 @@ func _physics_process(delta):
 		input_direction.y += 1
 	if Input.is_action_pressed("ui_up"):
 		input_direction.y -= 1
-	if input_direction != Vector2.ZERO:
-		var target_force = input_direction.normalized() * current_head_thrust
-		var acceleration_speed = 3.0
-		current_force = current_force.lerp(target_force, delta * acceleration_speed)
-	else:
-		current_force = Vector2.ZERO
-
-	if not eating:
-		if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
-			attach_joint_to_candidate(head, "head_joint")
-
-		if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
-			attach_joint_to_candidate(tail, "tail_joint")
-	
-	get_active_head()
-	if active_head:
-		if active_head.bramble_colliding:
-			var rebound_force = active_head.bramble_collision_normal * 20000
-			var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
-			active_head.apply_force(rebound_force) 
+			
+	if(!butterfly_mode):
+		handle_rotation()
+		
+		if input_direction != Vector2.ZERO:
+			var target_force = input_direction.normalized() * current_head_thrust
+			var acceleration_speed = 3.0
+			current_force = current_force.lerp(target_force, delta * acceleration_speed)
 		else:
-			active_head.apply_force(current_force)
-	handle_head_sprites()
-	
-	if head.in_cocoon and tail.in_cocoon and !transitioning:
-		transitioning = true
-		get_parent().zoom_in_cocoon()
-		get_parent().fade_background_to_white(0.15)
-		await get_tree().create_timer(7.5).timeout
-		get_tree().get_first_node_in_group("JustTheActualCocoon").close_up()
-		get_parent().fade_background_to_clear(1);
-		get_parent().zoom_out()
+			current_force = Vector2.ZERO
+
+		if not eating:
+			if Input.is_action_pressed("stick_head") and self.get("head_joint") == null:
+				attach_joint_to_candidate(head, "head_joint")
+
+			if Input.is_action_pressed("stick_tail") and self.get("tail_joint") == null:
+				attach_joint_to_candidate(tail, "tail_joint")
+		
+		get_active_head()
+		if active_head:
+			if active_head.bramble_colliding:
+				var rebound_force = active_head.bramble_collision_normal * 20000
+				var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
+				active_head.apply_force(rebound_force) 
+			else:
+				active_head.apply_force(current_force)
+		handle_head_sprites()
+		
+		if head.in_cocoon and tail.in_cocoon and !transitioning:
+			transitioning = true
+			get_parent().zoom_in_cocoon()
+			get_parent().fade_background_to_white(0.15)
+			await get_tree().create_timer(7.5).timeout
+			
+			get_parent().grow_butterfy()
+			get_tree().get_first_node_in_group("JustTheActualCocoon").close_up()
+			get_parent().fade_background_to_clear(1);
+			get_parent().zoom_out()
+	else:
+		var flap_force := Vector2.ZERO
+
+		if Input.is_action_just_pressed("ui_up") and can_flap:
+			can_flap = false  # block further flaps until cooldown ends
+
+			butterfly_instance.get_node("Wings").texture = load("res://Assets/buttery wings open.png")
+			butterfly_instance.linear_velocity.y = $ButterflyBody.linear_velocity.y/2
+			flap_force.y = -75000
+			
+			# Delay then set wings closed and re-enable flap
+			await get_tree().create_timer(0.2).timeout
+			butterfly_instance.get_node("Wings").texture  = load("res://Assets/buttery wings closed.png")
+			butterfly_instance.get_node("swoosh").play()
+			can_flap = true  # re-enable flap after delay
+
+		if Input.is_action_pressed("ui_left"):
+			flap_force.x = -800
+		elif Input.is_action_pressed("ui_right"):
+			flap_force.x = 800
+		else:
+			if butterfly_instance.rotation_degrees > 0:
+				butterfly_instance.rotation_degrees -= delta * 300
+				if butterfly_instance.rotation_degrees < 0:
+					butterfly_instance.rotation_degrees = 0
+			elif butterfly_instance.rotation_degrees < 0:
+				butterfly_instance.rotation_degrees += delta * 300
+				if butterfly_instance.rotation_degrees > 0:
+					butterfly_instance.rotation_degrees = 0
+		
+		butterfly_instance.rotation_degrees -= Input.get_action_strength("ui_left") * delta * 300
+		butterfly_instance.rotation_degrees += Input.get_action_strength("ui_right") * delta * 300
+		butterfly_instance.rotation_degrees = clamp(butterfly_instance.rotation_degrees, -30, 30)
+
+		butterfly_instance.angular_velocity = 0
+		butterfly_instance.apply_force(flap_force)
+
 
 func handle_head_sprites():
 	if Input.is_action_pressed("stick_head"):

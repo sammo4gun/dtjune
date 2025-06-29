@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c20xcgusbs3hk"]
+[gd_scene load_steps=14 format=3 uid="uid://c20xcgusbs3hk"]
 
 [ext_resource type="Script" uid="uid://d13wn4fkie8ov" path="res://fruit.gd" id="1_dajs1"]
 [ext_resource type="Texture2D" uid="uid://cft1ctkhluy1d" path="res://Assets/Fruit/strawberry.png" id="2_t45jj"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c25jwk3uo6c6p" path="res://Assets/Fruit/orange.png" id="6_kf857"]
 [ext_resource type="Texture2D" uid="uid://3obcot58wnmq" path="res://Assets/Fruit/grapes.png" id="7_kf857"]
 [ext_resource type="Texture2D" uid="uid://hdfy5q8l52jk" path="res://Assets/Fruit/raspberry .png" id="7_r5id7"]
+[ext_resource type="AudioStream" uid="uid://mpdwdh81nhng" path="res://Audio/shimmering.mp3" id="9_kf857"]
 
 [sub_resource type="Curve" id="Curve_t45jj"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.757353, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -86,3 +87,11 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_7dwnl")
+
+[node name="Shimmering" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1, 0)
+stream = ExtResource("9_kf857")
+volume_db = -2.0
+autoplay = true
+max_distance = 500.0
+parameters/looping = true
