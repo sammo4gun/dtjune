@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c8arbucqopsgm"]
+[gd_scene load_steps=25 format=3 uid="uid://c8arbucqopsgm"]
 
 [ext_resource type="Script" uid="uid://c4ogtft3wpc3l" path="res://head.gd" id="1_xe7ry"]
 [ext_resource type="PackedScene" uid="uid://x7265w68qvjj" path="res://grab_particles.tscn" id="3_hbaeg"]
@@ -11,12 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://c7cnu1vbrbfjt" path="res://Assets/Caterpillar/Emotions/caterpillar effort open.png" id="7_iihrl"]
 [ext_resource type="Texture2D" uid="uid://bmwnb3yyk6aos" path="res://Assets/Caterpillar/Emotions/caterpillar effort .png" id="8_eg15x"]
 [ext_resource type="Texture2D" uid="uid://dxopmwh4xaxq6" path="res://Assets/Caterpillar/Emotions/caterpillar content open .png" id="9_85nsl"]
-[ext_resource type="Texture2D" uid="uid://crk4g3sexfqol" path="res://Assets/Caterpillar/Emotions/caterpillar content.png" id="10_at4hp"]
-[ext_resource type="Texture2D" uid="uid://cb552cx72a3ji" path="res://Assets/Caterpillar/Emotions/caterpillar eating.png" id="11_at4hp"]
-[ext_resource type="Texture2D" uid="uid://3p2g7a0kocyx" path="res://Assets/Caterpillar/Emotions/caterpillar eating closed.png" id="12_80bv5"]
 [ext_resource type="AudioStream" uid="uid://btfehxm6kix87" path="res://Audio/eating.mp3" id="9_hbaeg"]
+[ext_resource type="Texture2D" uid="uid://crk4g3sexfqol" path="res://Assets/Caterpillar/Emotions/caterpillar content.png" id="10_at4hp"]
 [ext_resource type="AudioStream" uid="uid://coudkv2alhobe" path="res://Audio/pain.mp3" id="10_iihrl"]
 [ext_resource type="AudioStream" uid="uid://bxa65r7utckc" path="res://Audio/slap.mp3" id="10_jmvna"]
+[ext_resource type="Texture2D" uid="uid://cb552cx72a3ji" path="res://Assets/Caterpillar/Emotions/caterpillar eating.png" id="11_at4hp"]
+[ext_resource type="Texture2D" uid="uid://3p2g7a0kocyx" path="res://Assets/Caterpillar/Emotions/caterpillar eating closed.png" id="12_80bv5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rwjvo"]
 friction = 0.25
