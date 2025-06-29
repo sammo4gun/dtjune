@@ -45,7 +45,7 @@ alpha_curve = SubResource("CurveTexture_kf857")
 anim_offset_max = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mihp7"]
-radius = 3.0
+radius = 2.53684
 
 [node name="Head" type="RigidBody2D"]
 rotation = -1.5708

@@ -48,7 +48,6 @@ func _physics_process(_delta):
 		for body in colliding_bodies:# Perform actions based on the colliding body, e.g.,
 			if body.is_in_group("Wall"):
 				stick_candidate = body;
-				direction_candidate = get_direction_to_grab()
 				break;
 	
 		var all_collision_points := []
@@ -70,9 +69,12 @@ func _physics_process(_delta):
 				tail_closed_sprite.visible = true
 	
 	if grabbing:
-		pass
+		handle_sprite_grabs()
+	else:
+		for s in sprite_base_rotations:
+			s.rotation = lerp_angle(s.rotation, sprite_base_rotations[s], 0.3)
 
-func get_direction_to_grab():
+func handle_sprite_grabs():
 	var dist_list = []
 	for i in raylist:
 		if i.is_colliding():
@@ -81,6 +83,20 @@ func get_direction_to_grab():
 				dist_list.append(dist)
 			else: dist_list.append(100)
 		else: dist_list.append(100)
+	
+	var min_dist = 100
+	var min_dir = -1
+	for i in range(len(dist_list)):
+		if dist_list[i] < min_dist:
+			min_dist = dist_list[i]
+			min_dir = i
+	
+	if min_dir >= 0:
+		for s in sprite_base_rotations:
+			var angle = raylist[min_dir].target_position.angle()
+			if is_real_head: angle += 1.5 * PI
+			else: angle += 0.5 * PI
+			s.rotation = lerp_angle(s.rotation, sprite_base_rotations[s] + angle, 0.1)
 
 func set_colour(color):
 	for sprite in [head_open_sprite, head_closed_sprite, head_happy_sprite, head_shocked_sprite, tail_open_sprite, tail_closed_sprite]:

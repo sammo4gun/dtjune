@@ -141,10 +141,16 @@ func _physics_process(delta):
 func handle_head_sprites():
 	if Input.is_action_pressed("stick_head"):
 		head.seeking = self.get("head_joint") == null
-	else: head.seeking = false
+		head.grabbing = self.get("head_joint") != null
+	else: 
+		head.seeking = false
+		head.grabbing = false
 	if Input.is_action_pressed("stick_tail"):
 		tail.seeking = self.get("tail_joint") == null
-	else: tail.seeking = false
+		tail.grabbing = self.get("tail_joint") != null
+	else: 
+		tail.seeking = false
+		tail.grabbing = false
 
 func handle_rotation():
 	for part in target_rotation:
