@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8iouhd8qijyf"]
+
+[ext_resource type="AudioStream" uid="uid://cfgpwxp7v0kr1" path="res://Assets/Music/mainmenuborn2fly.mp3" id="1_rk3rh"]
+
+[node name="MainMenuMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_rk3rh")

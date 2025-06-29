@@ -7,3 +7,4 @@ func close_up():
 	$Sprite2D2.queue_free()
 	$CollisionPolygon2D.queue_free()
 	$Area2D.queue_free()
+	queue_free()

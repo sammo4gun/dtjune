@@ -28,7 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://clr1aqi8wc1aa" path="res://Assets/Objects/sign left.png" id="22_5j71u"]
 [ext_resource type="AudioStream" uid="uid://du12kb0v5vsqq" path="res://Audio/cocoontransformation.mp3" id="23_jyqkj"]
 [ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
-[ext_resource type="PackedScene" path="res://cocoon.tscn" id="28_rhl3w"]
+[ext_resource type="PackedScene" uid="uid://eikpbeh754jf" path="res://cocoon.tscn" id="28_rhl3w"]
 [ext_resource type="Texture2D" uid="uid://53ag7yl7nved" path="res://Assets/UI/YouDidIt.png" id="29_bun23"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
@@ -311,12 +311,6 @@ flip_h = true
 [node name="Sign10" type="Sprite2D" parent="Signs"]
 position = Vector2(-1268.71, 496.596)
 rotation = -1.12149
-scale = Vector2(0.126152, 0.126152)
-texture = ExtResource("22_5j71u")
-
-[node name="Sign7" type="Sprite2D" parent="Signs"]
-position = Vector2(-4346.25, 927.079)
-rotation = -2.98113
 scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 
@@ -789,11 +783,17 @@ rotation = -2.89859
 rotation = 0.0
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2120, 5224)
+position = Vector2(2148, 5333)
 
 [node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
 z_index = 1
 position = Vector2(3761, -846)
+
+[node name="Sign7" type="Sprite2D" parent="Cocoon"]
+position = Vector2(-26, -248)
+rotation = -1.44079
+scale = Vector2(0.126152, 0.126152)
+texture = ExtResource("22_5j71u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(2276, 5093)

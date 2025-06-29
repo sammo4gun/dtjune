@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Born To Fly"
-run/main_scene="uid://bbq0b4ceveffm"
+run/main_scene="uid://dq7hhi85wjlfl"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MainMenuMusic="*res://main_menu_music.tscn"
 
 [display]
 

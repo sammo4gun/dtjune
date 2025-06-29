@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq7hhi85wjlfl"]
+
+[ext_resource type="Texture2D" uid="uid://ckt7fhx2xi57r" path="res://Assets/UI/menu.png" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://dxpqd3xd78j1f" path="res://menu.gd" id="1_ouk20"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ouk20")
+
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(586, 319)
+scale = Vector2(1.03553, 1.03553)
+texture = ExtResource("1_lti8b")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 151.0
+offset_top = 208.0
+offset_right = 388.0
+offset_bottom = 319.0
+focus_mode = 0
+flat = true
+
+[node name="HowToPlay" type="Button" parent="."]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 418.0
+offset_right = 1083.0
+offset_bottom = 529.0
+focus_mode = 0
+flat = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="HowToPlay" to="." method="_on_how_to_play_pressed"]

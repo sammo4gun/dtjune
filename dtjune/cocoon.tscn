@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cc5u8trdkwfim"]
+[gd_scene load_steps=7 format=3 uid="uid://eikpbeh754jf"]
 
 [ext_resource type="Script" uid="uid://j1miysbd88xy" path="res://cocoon.gd" id="1_1ua0w"]
 [ext_resource type="Texture2D" uid="uid://cgqguewvbu8q2" path="res://Assets/cocoon.png" id="1_kck0u"]
