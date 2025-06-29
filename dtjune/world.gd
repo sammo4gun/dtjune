@@ -5,6 +5,8 @@ extends Node2D
 
 @onready var ui_final = $"Camera2D/YouDidIt"
 
+@onready var music = $"MusicPlayer"
+
 var player_scene = preload("res://player.tscn")
 
 var camera_position = Vector2(0,0)
@@ -23,6 +25,8 @@ func _physics_process(delta: float) -> void:
 		target_pos = player.get_camera_pos()
 	else:
 		target_pos = camera_position
+	if target_pos == null:
+		target_pos = camera.position
 	
 	target_pos.y = max(-2973.0, target_pos.y)
 	
@@ -33,6 +37,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta):
 	if fading_in:
+		music.volume_db = lerpf(music.volume_db, -200, 0.1)
 		fade_alpha = clamp(fade_alpha + fade_speed * delta, 0.0, 1.0)
 		$WhiteFade.color = Color(1, 1, 1, fade_alpha)#
 		if(fade_alpha == 1.0):
@@ -93,9 +98,17 @@ func grow_player(size, colours, new_colour):
 	player.global_position = player_pos + Vector2(0, -35)
 	add_child(player)
 
+var ending = false
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	body.queue_free()
-	fade_background_to_white(0.15)
-	await get_tree().create_timer(7.5).timeout
-	get_tree().change_scene_to_file("res://menu.tscn")
+func _on_area_2d_body_entered(_body: Node2D) -> void:
+	if not ending:
+		ending = true
+		fade_background_to_white(0.15)
+		await get_tree().create_timer(7.5).timeout
+		get_tree().change_scene_to_file("res://menu.tscn")
+
+func turn_down():
+	music.volume_db = - 30
+
+func turn_up():
+	music.volume_db = - 15

@@ -143,8 +143,10 @@ func init_links():
 
 func get_camera_pos():
 	if butterfly_mode:
-		return butterfly_instance.global_position;
-	else:	
+		if butterfly_instance:
+			return butterfly_instance.global_position;
+		else: return null
+	else:
 		return (head.global_position+tail.global_position) / 2
 
 func _physics_process(delta):
@@ -179,7 +181,6 @@ func _physics_process(delta):
 		if active_head:
 			if active_head.bramble_colliding:
 				var rebound_force = active_head.bramble_collision_normal * 20000
-				var reflected_force = current_force.bounce(active_head.bramble_collision_normal)
 				active_head.apply_force(rebound_force) 
 			else:
 				active_head.apply_force(current_force)

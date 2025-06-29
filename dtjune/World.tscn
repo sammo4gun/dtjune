@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=4 uid="uid://bbq0b4ceveffm"]
+[gd_scene load_steps=37 format=4 uid="uid://bbq0b4ceveffm"]
 
 [ext_resource type="Script" uid="uid://tqfinft7fch7" path="res://world.gd" id="1_js7pq"]
 [ext_resource type="Texture2D" uid="uid://bc5up41pg017q" path="res://Assets/JungleTileset.png" id="2_2dftf"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://b6exocv4a2gxn" path="res://Static Objects/vinesmall.tscn" id="25_aj1ai"]
 [ext_resource type="PackedScene" uid="uid://eikpbeh754jf" path="res://cocoon.tscn" id="28_rhl3w"]
 [ext_resource type="Texture2D" uid="uid://53ag7yl7nved" path="res://Assets/UI/YouDidIt.png" id="29_bun23"]
+[ext_resource type="AudioStream" uid="uid://beblkgg1mysw7" path="res://Assets/Music/born2fly.mp3" id="32_mnkyj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bcbcq"]
 texture = ExtResource("2_2dftf")
@@ -319,8 +320,8 @@ scale = Vector2(0.126152, 0.126152)
 texture = ExtResource("22_5j71u")
 
 [node name="Sign11" type="Sprite2D" parent="Signs"]
-position = Vector2(-2969.32, 129.639)
-rotation = -1.12149
+position = Vector2(-2972.23, 126.549)
+rotation = -0.652478
 scale = Vector2(0.126, -0.126)
 texture = ExtResource("22_5j71u")
 
@@ -653,8 +654,8 @@ position = Vector2(5014, 261)
 rotation = 0.250431
 
 [node name="Branch4Left" parent="." instance=ExtResource("7_fvag4")]
-position = Vector2(4860, 336)
-rotation = 0.597831
+position = Vector2(4867, 335)
+rotation = 0.579611
 
 [node name="RightTrunk" type="Node2D" parent="."]
 position = Vector2(4527, 2097)
@@ -811,7 +812,7 @@ rotation = -2.89859
 rotation = 0.0
 
 [node name="Player" parent="." instance=ExtResource("3_bcbcq")]
-position = Vector2(2157, 5338)
+position = Vector2(2036, 5341)
 
 [node name="Cocoon" parent="." instance=ExtResource("28_rhl3w")]
 z_index = 1
@@ -952,6 +953,12 @@ color = Color(0.560784, 0.337255, 0.231373, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(4239, -3618)
 shape = SubResource("RectangleShape2D_gtthi")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("32_mnkyj")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 
